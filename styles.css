@@ -1511,10 +1511,22 @@ button {
 
 .hg-item:hover .hg-media img { transform: scale(1.05); }
 
-/* products with a second angle: stack both images, cross-fade on hover */
-.hg-media.has-alt { display: grid; place-items: center; }
-.hg-media.has-alt img { grid-area: 1 / 1; transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease; }
-.hg-media .hg-img-alt { opacity: 0; }
+/* products with a second angle: the second image sits exactly over the first
+   (same box as .hg-media's padding) and cross-fades in on hover */
+.hg-media.has-alt img { transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease; }
+.hg-media .hg-img-alt {
+    position: absolute;
+    top: 7%;
+    right: 7%;
+    bottom: 13%;
+    left: 7%;
+    width: 86%;
+    height: 80%;
+    max-width: none;
+    max-height: none;
+    object-fit: contain;
+    opacity: 0;
+}
 .hg-item:hover .hg-media.has-alt img:first-child { opacity: 0; }
 .hg-item:hover .hg-media .hg-img-alt { opacity: 1; }
 
