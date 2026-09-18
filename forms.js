@@ -8,7 +8,7 @@
    The URL below can only send mail TO you, so it is safe in the page.
    ============================================================ */
 (function () {
-    const FORMS_ENDPOINT = "PASTE_APPS_SCRIPT_URL";
+    const FORMS_ENDPOINT = "https://script.google.com/macros/s/AKfycbyH0uNgeLJsYe7qZw4k25kkQ1w51F7cBxQP7Re8_tlAK-44Plr89c8yvY1BTySo7dTe/exec";
     const MAX_FILE_MB = 20;
     const pageOpenedAt = Date.now();
 
