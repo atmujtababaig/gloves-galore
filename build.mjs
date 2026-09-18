@@ -170,6 +170,14 @@ const jsonLd = `<script type="application/ld+json">${JSON.stringify(org)}</scrip
 files['index.html'] = files['index.html'].replace('<!-- SEO:JSONLD -->', jsonLd)
 for (const f of TEXT_FILES) files[f] = files[f].split('{{SITE_URL}}').join(SITE_URL)
 
+// Cache-busting: styles.css → styles.css?v=<content hash>, so visitors get new CSS/JS right after a deploy
+for (const f of TEXT_FILES.filter((f) => /\.(css|js)$/.test(f))) {
+  const v = createHash('sha1').update(files[f]).digest('hex').slice(0, 8)
+  for (const page of ['index.html', 'connect.html']) {
+    files[page] = files[page].split(`"${f}"`).join(`"${f}?v=${v}"`)
+  }
+}
+
 for (const [f, text] of Object.entries(files)) await writeFile(path.join(OUT, f), text)
 
 const today = new Date().toISOString().slice(0, 10)
