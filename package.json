@@ -1,0 +1,12 @@
+{
+  "name": "gloves-galore-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "serve": "python -m http.server 5599"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.0"
+  }
+}

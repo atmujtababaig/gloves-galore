@@ -1,0 +1,54 @@
+{
+  "_help": "Everything search engines learn about the business lives here. build.mjs reads it. Empty values are simply left out.",
+  "siteUrl": "https://atmujtababaig.github.io/gloves-galore",
+  "customDomain": "",
+  "business": {
+    "name": "Gloves Galore",
+    "description": "Private-label glove manufacturer for MTB, BMX, motocross, gym and ski brands: design, sampling, bulk production, quality control and branded packaging.",
+    "email": "",
+    "phone": "+92 314 1632509",
+    "city": "Sialkot",
+    "country": "PK",
+    "socials": [
+      "https://www.instagram.com/glovesgalore_/"
+    ],
+    "region": "Punjab",
+    "alternateName": [
+      "GlovesGalore",
+      "Gloves Galore Sialkot"
+    ]
+  },
+  "pages": [
+    {
+      "file": "index.html",
+      "path": "/",
+      "priority": "1.0"
+    },
+    {
+      "file": "connect.html",
+      "path": "/connect.html",
+      "priority": "0.8"
+    }
+  ],
+  "images": {
+    "_help": "Largest width (px) each image is resized to. Anything not listed uses defaultMaxWidth. keepOriginal = copied untouched.",
+    "defaultMaxWidth": 1600,
+    "quality": 80,
+    "maxWidth": {
+      "assets/mtb.jpg": 1100,
+      "assets/bmx.jpg": 1100,
+      "assets/mx.jpg": 1100,
+      "assets/gym-gloves.png": 1100,
+      "assets/skiing-gloves.png": 1100,
+      "assets/Gloves Galore-3d-Diagram.webp": 1000,
+      "assets/random/mono-7.webp": 1200,
+      "assets/gloves/": 900
+    },
+    "keepOriginal": [
+      "assets/logo.png",
+      "assets/og-image.jpg",
+      "assets/favicon-32.png",
+      "assets/apple-touch-icon.png"
+    ]
+  }
+}

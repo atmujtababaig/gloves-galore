@@ -1,0 +1,8 @@
+# build output + dependencies
+dist/
+node_modules/
+
+# local only: backups, experiments, editor/agent settings
+_hero_backup/
+gsap-section/
+.claude/
