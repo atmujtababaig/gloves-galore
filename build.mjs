@@ -199,7 +199,7 @@ await writeFile(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitema
 await writeFile(path.join(OUT, '404.html'), `<!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Page not found | Gloves Galore</title><meta name="robots" content="noindex">
-<link rel="icon" href="${SITE_URL}/favicon.ico" sizes="48x48">
+<link rel="icon" href="${SITE_URL}/favicon.ico" sizes="48x48"><link rel="icon" href="${SITE_URL}/assets/favicon.svg" type="image/svg+xml">
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@900&family=Montserrat:wght@500&display=swap" rel="stylesheet">
 <style>
   body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0D0D0D;color:#f4f4ed;font-family:Montserrat,sans-serif;text-align:center;padding:1rem}
