@@ -1,7 +1,7 @@
 {
   "_help": "Everything search engines learn about the business lives here. build.mjs reads it. Empty values are simply left out.",
   "siteUrl": "https://atmujtababaig.github.io/gloves-galore",
-  "customDomain": "",
+  "customDomain": "glovesgalore.net",
   "business": {
     "name": "Gloves Galore",
     "description": "Private-label glove manufacturer for MTB, BMX, motocross, gym and ski brands: design, sampling, bulk production, quality control and branded packaging.",
