@@ -63,7 +63,11 @@
       "assets/logo.png",
       "assets/og-image.jpg",
       "assets/favicon-32.png",
-      "assets/apple-touch-icon.png"
+      "assets/apple-touch-icon.png",
+      "assets/favicon-16.png",
+      "assets/favicon-48.png",
+      "assets/icon-192.png",
+      "assets/icon-512.png"
     ]
   }
 }
