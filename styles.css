@@ -569,8 +569,14 @@ button {
    HERO — "GRIP THE WORLD"  (rollback: restore files from _hero_backup/)
    ============================================================ */
 .hero--grip {
+    /* headline position/size; .hero-model uses the same values to place the helmet */
+    --title-top: clamp(6.25rem, 11vh, 9rem); /* never closer than ~20px to the header */
+    --title-size: clamp(3.75rem, 10vw, 10rem);
+    --title-line: calc(0.9 * var(--title-size));
+    --lines-above-helmet: 1.15; /* helmet top sits just inside the PARTNER line */
     height: 100vh;
-    min-height: 640px;
+    height: 100svh; /* visible screen on phones (100vh hides the bottom behind the browser bar) */
+    min-height: 560px;
     background: #000;
     display: flex;
     align-items: flex-end;
@@ -581,7 +587,7 @@ button {
 
 .hero--grip .hero-title {
     position: absolute;
-    top: clamp(5rem, 11vh, 9rem);
+    top: var(--title-top);
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
@@ -597,14 +603,20 @@ button {
     text-transform: uppercase;
     letter-spacing: -0.02em;
     line-height: 0.9;
-    font-size: clamp(3.75rem, 11.5vw, 11rem);
+    font-size: var(--title-size);
     z-index: 1;
 }
+
+/* PARTNER always gets its own line, so the helmet only ever overlaps that word */
+.hero--grip .hero-title .outline-text { display: block; }
 
 .hero-model {
     position: relative;
     z-index: 2;
-    height: min(90vh, 900px);
+    height: min(90vh, 900px); /* fallback for browsers without svh */
+    /* = visible height − headline top − the lines above the helmet */
+    height: calc(max(100svh, 560px) - var(--title-top) - var(--lines-above-helmet) * var(--title-line));
+    width: auto;
     max-width: 100%;
     object-fit: contain;
     object-position: bottom center;
@@ -655,18 +667,17 @@ button {
 
 @media (max-width: 640px) {
     /* big headline near the top, filling the width (site heading style) */
-    .hero--grip .hero-title {
-        top: clamp(4.5rem, 10vh, 6rem);
-        font-size: clamp(4.5rem, 24vw, 8rem);
-        line-height: 0.9;
+    .hero--grip {
+        --title-top: clamp(6rem, 14svh, 8rem); /* a little breathing room under the header */
+        --title-size: clamp(4.5rem, 24vw, 8rem);
+        --lines-above-helmet: 2.15; /* phones: YOUR B2B / GLOVES / PARTNER */
     }
-    /* size the rider by WIDTH so both gloves stay visible; slightly wider
-       than the screen so the helmet rises up and overlaps the headline */
-    .hero-model {
-        width: 125%;
-        height: auto;
-        max-width: none;
+    /* keep LETS CONNECT comfortably inside the visible screen */
+    .hero--grip .explore-btn-wrapper {
+        bottom: calc(3rem + env(safe-area-inset-bottom, 0px));
     }
+    /* phones: let the rider be a bit wider than the screen so both gloves fill it */
+    .hero-model { max-width: 135%; }
 }
 
 .hero-bg {
@@ -2710,7 +2721,10 @@ button {
     margin-bottom: 0.2rem;
 }
 
+.info-card-header > div { min-width: 0; } /* let long emails wrap instead of pushing the card wider */
+
 .info-card-header h4 {
+    overflow-wrap: anywhere;
     font-family: var(--font-display);
     font-size: 1.6rem;
     font-weight: 900;
@@ -2864,7 +2878,7 @@ button {
 /* Responsive adjustments for Connect Page */
 @media (max-width: 991px) {
     .connect-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr); /* 1fr alone can't shrink below its content → page scrolled sideways on phones */
     }
 }
 
@@ -2920,3 +2934,273 @@ button {
 /* the newsletter form is a row; put its message on its own line */
 .newsletter-form { flex-wrap: wrap; }
 .newsletter-form .form-status { flex-basis: 100%; }
+
+/* ============================================================
+   FORM CONSENT LINE (under Send message)
+   ============================================================ */
+.form-legal {
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+.form-legal a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* ============================================================
+   LEGAL PAGES — privacy.html, terms.html, shipping.html
+   ============================================================ */
+.legal-hero {
+    padding-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.legal-updated {
+    margin: 1.75rem 0 0;
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #8a8a8a;
+}
+
+.legal {
+    padding: 0 1.5rem clamp(4rem, 8vw, 8rem);
+    background-color: var(--color-bg-dark);
+}
+
+.legal-layout {
+    max-width: 72rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+}
+
+/* "On this page" list — sticks beside the text on desktop */
+.legal-toc {
+    position: sticky;
+    top: 7rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1.25rem;
+    background: #141414;
+}
+
+.legal-toc-title {
+    margin: 0 0 1rem;
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-neon);
+}
+
+.legal-toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+    counter-reset: toc;
+}
+
+.legal-toc li { counter-increment: toc; }
+
+.legal-toc ol a {
+    display: flex;
+    gap: 0.65rem;
+    color: #bdbdbd;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.35;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.legal-toc ol a::before {
+    content: counter(toc, decimal-leading-zero);
+    flex-shrink: 0;
+    color: #5f5f5f;
+    font-family: var(--font-display);
+    font-weight: 900;
+}
+
+.legal-toc ol a:hover { color: #fff; }
+.legal-toc ol a:hover::before { color: var(--color-neon); }
+
+.legal-toc-other {
+    display: grid;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.legal-toc-other a {
+    color: var(--color-neon);
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.legal-toc-other a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* the text itself */
+.legal-body {
+    min-width: 0;
+    color: #d4d4d4;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.75;
+}
+
+.legal-body a {
+    color: var(--color-neon);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    overflow-wrap: anywhere;
+}
+
+.legal-body strong { color: #fff; font-weight: 700; }
+
+/* lime "In short" card */
+.legal-summary {
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    border-radius: 1.5rem;
+    background: var(--color-neon);
+    color: var(--color-bg-dark);
+}
+
+.legal-summary h2 {
+    margin: 0 0 1rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 3.2vw, 2.5rem);
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.legal-summary ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.65rem;
+}
+
+.legal-summary li {
+    position: relative;
+    padding-left: 1.75rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.legal-summary li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.3em;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: var(--color-bg-dark) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.2l2.6 2.6L12 5.4' fill='none' stroke='%23C8FF00' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% no-repeat;
+}
+
+/* numbered sections */
+.legal-section {
+    padding: clamp(1.75rem, 3vw, 2.5rem) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    scroll-margin-top: 6.5rem; /* clear the fixed navbar when jumping from the list */
+}
+
+.legal-section h2 {
+    display: flex;
+    align-items: baseline;
+    gap: 0.9rem;
+    margin: 0 0 1rem;
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+}
+
+.legal-num {
+    flex-shrink: 0;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--color-neon);
+}
+
+.legal-section p { margin: 0 0 1rem; }
+.legal-section p:last-child { margin-bottom: 0; }
+
+.legal-section ul {
+    margin: 0.25rem 0 1rem;
+    padding-left: 1.25rem;
+}
+
+.legal-section ul:last-child { margin-bottom: 0; }
+.legal-section li { margin-bottom: 0.5rem; padding-left: 0.25rem; }
+.legal-section li::marker { color: var(--color-neon); }
+
+/* "Questions?" card */
+.legal-contact {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem 2rem;
+    margin-top: clamp(1.5rem, 3vw, 2.5rem);
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    border: 1px solid rgba(200, 255, 0, 0.45);
+    border-radius: 1.5rem;
+    background: #141414;
+}
+
+.legal-contact h2 {
+    margin: 0;
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.legal-contact p { margin: 0.5rem 0 0; color: #bdbdbd; }
+
+.legal-contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* buttons keep their own colours (the text-link style above must not reach them) */
+.legal-contact a { text-decoration: none; }
+.legal-contact .btn-explore { color: #000; }
+.legal-contact .btn-primary:hover { color: #000; }
+.legal-contact .btn-primary { height: 3rem; }
+
+.footer-legal-links a[aria-current="page"] { color: var(--color-neon); }
+
+@media (max-width: 900px) {
+    .legal-layout { grid-template-columns: minmax(0, 1fr); }
+    .legal-toc { position: static; }
+}

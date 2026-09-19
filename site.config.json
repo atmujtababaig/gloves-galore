@@ -28,6 +28,21 @@
       "file": "connect.html",
       "path": "/connect.html",
       "priority": "0.8"
+    },
+    {
+      "file": "shipping.html",
+      "path": "/shipping.html",
+      "priority": "0.4"
+    },
+    {
+      "file": "terms.html",
+      "path": "/terms.html",
+      "priority": "0.4"
+    },
+    {
+      "file": "privacy.html",
+      "path": "/privacy.html",
+      "priority": "0.4"
     }
   ],
   "images": {

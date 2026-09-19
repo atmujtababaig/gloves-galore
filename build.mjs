@@ -21,8 +21,9 @@ const warnings = []
 
 const config = JSON.parse(await read('site.config.json'))
 const SITE_URL = (config.customDomain ? `https://${config.customDomain}` : config.siteUrl).replace(/\/$/, '')
+const PAGES = config.pages.map((p) => p.file) // every HTML page of the site (see site.config.json)
 const TEXT_FILES = [
-  'index.html', 'connect.html', 'styles.css', 'app.js', 'forms.js',
+  ...PAGES, 'styles.css', 'app.js', 'forms.js',
   'grid-template.js', 'products.js', 'sanity-config.js',
 ]
 
@@ -65,7 +66,7 @@ async function localFontCss(href) {
   fontCss.set(href, css)
   return css
 }
-for (const page of ['index.html', 'connect.html']) {
+for (const page of PAGES) {
   let html = files[page]
   for (const m of [...html.matchAll(/<link\b[^>]*href="(https:\/\/fonts\.googleapis\.com\/css2\?[^"]+)"[^>]*>/g)]) {
     try {
@@ -173,7 +174,7 @@ for (const f of TEXT_FILES) files[f] = files[f].split('{{SITE_URL}}').join(SITE_
 // Cache-busting: styles.css → styles.css?v=<content hash>, so visitors get new CSS/JS right after a deploy
 for (const f of TEXT_FILES.filter((f) => /\.(css|js)$/.test(f))) {
   const v = createHash('sha1').update(files[f]).digest('hex').slice(0, 8)
-  for (const page of ['index.html', 'connect.html']) {
+  for (const page of PAGES) {
     files[page] = files[page].split(`"${f}"`).join(`"${f}?v=${v}"`)
   }
 }
@@ -205,7 +206,7 @@ if (config.customDomain) await writeFile(path.join(OUT, 'CNAME'), `${config.cust
 // ---------- report ----------
 if (SITE_URL.includes('GITHUB_USERNAME')) warnings.push('siteUrl still has GITHUB_USERNAME in site.config.json')
 if (files['forms.js'].includes('PASTE_APPS_SCRIPT_URL')) warnings.push('forms are not connected: Google Apps Script URL missing in forms.js')
-if (/1234567/.test(files['index.html'] + files['connect.html'])) warnings.push('placeholder phone number (1234567) still on the site')
+if (/1234567/.test(PAGES.map((p) => files[p]).join(''))) warnings.push('placeholder phone number (1234567) still on the site')
 
 console.log(`Built ${SITE_URL}`)
 console.log(`  ${products.length} products written into index.html`)
