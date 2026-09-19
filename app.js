@@ -131,6 +131,91 @@ gsap.from(".product-card", {
     ease: "power2.out"
 });
 
+// "We build for" carousel: arrow buttons, mouse drag, progress bar
+(function initLinesCarousel() {
+    const track = document.getElementById("lines-carousel");
+    if (!track) return;
+    const section = track.closest(".product-lines");
+    const prev = section.querySelector('.carousel-btn[data-dir="-1"]');
+    const next = section.querySelector('.carousel-btn[data-dir="1"]');
+    const fill = section.querySelector(".carousel-progress-fill");
+    const cards = () => Array.from(track.querySelectorAll(".product-card"));
+
+    // Lenis must not grab wheel/touch inside the track (horizontal trackpad swipes)
+    track.setAttribute("data-lenis-prevent-wheel", "");
+
+    const maxScroll = () => track.scrollWidth - track.clientWidth;
+
+    // scrollLeft value that lines each card up with the track's left padding
+    function cardStops(pad) {
+        const base = track.getBoundingClientRect().left + pad - track.scrollLeft;
+        return cards().map((c) => Math.min(maxScroll(), Math.round(c.getBoundingClientRect().left - base)));
+    }
+
+    function update() {
+        const max = maxScroll();
+        const x = track.scrollLeft;
+        prev.disabled = x <= 2;
+        next.disabled = x >= max - 2;
+        const visible = track.clientWidth / track.scrollWidth;
+        const progress = max > 0 ? x / max : 1;
+        fill.style.transform = `scaleX(${visible + (1 - visible) * progress})`;
+    }
+
+    // Scroll to the next/previous card edge
+    function step(dir) {
+        const pad = parseFloat(getComputedStyle(track).paddingLeft) || 0;
+        const x = track.scrollLeft;
+        const lefts = cardStops(pad);
+        let target;
+        if (dir > 0) target = lefts.find((l) => l > x + 5);
+        else target = [...lefts].reverse().find((l) => l < x - 5);
+        if (target === undefined) target = dir > 0 ? maxScroll() : 0;
+        track.scrollTo({ left: target, behavior: "smooth" });
+    }
+
+    prev.addEventListener("click", () => step(-1));
+    next.addEventListener("click", () => step(1));
+
+    track.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
+        if (e.key === "ArrowLeft") { e.preventDefault(); step(-1); }
+    });
+
+    // Mouse drag (touch devices scroll natively)
+    let down = false, startX = 0, startScroll = 0, moved = false;
+    track.addEventListener("pointerdown", (e) => {
+        if (e.pointerType !== "mouse" || e.button !== 0) return;
+        down = true; moved = false;
+        startX = e.clientX; startScroll = track.scrollLeft;
+    });
+    window.addEventListener("pointermove", (e) => {
+        if (!down) return;
+        const dx = e.clientX - startX;
+        if (!moved && Math.abs(dx) > 4) { moved = true; track.classList.add("is-dragging"); }
+        if (moved) track.scrollLeft = startScroll - dx;
+    });
+    window.addEventListener("pointerup", () => {
+        if (!down) return;
+        down = false;
+        if (!moved) return;
+        track.classList.remove("is-dragging");
+        // settle on the nearest card
+        const pad = parseFloat(getComputedStyle(track).paddingLeft) || 0;
+        const x = track.scrollLeft;
+        const lefts = cardStops(pad).concat(maxScroll());
+        const nearest = lefts.reduce((a, b) => (Math.abs(b - x) < Math.abs(a - x) ? b : a));
+        track.scrollTo({ left: nearest, behavior: "smooth" });
+    });
+    // a drag must not trigger the CTA link
+    track.addEventListener("click", (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+
+    track.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    window.addEventListener("load", update);
+    update();
+})();
+
 // Tech Cards Scroll Animation (If present)
 if (document.querySelector(".tech-section")) {
     gsap.from(".tech-card", {

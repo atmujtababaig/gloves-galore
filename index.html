@@ -38,7 +38,7 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&family=Big+Shoulders+Display:wght@700;900&display=swap"
         rel="stylesheet">
     <!-- Only the icons the site uses (full icon font is 1.1 MB). Add a name here if you use a new icon. -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&icon_names=add,arrow_forward,arrow_upward,call,check_circle,cloud_upload,east,location_on,mail&display=block"
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&icon_names=add,arrow_forward,arrow_upward,call,check_circle,cloud_upload,east,location_on,mail,west&display=block"
         rel="stylesheet">
     <!-- CSS -->
     <style>/* lenis.css (inlined, was a separate request to unpkg.com) */html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}.lenis.lenis-stopped{overflow:clip}.lenis.lenis-smooth iframe{pointer-events:none}</style>
@@ -113,10 +113,7 @@
                 WE BUILD <br> <span class="outline-text">FOR</span>
             </h2>
         </div>
-        <div class="scroll-indicator-right">
-            <span class="material-symbols-outlined">east</span>
-        </div>
-        <div class="carousel">
+        <div class="carousel" id="lines-carousel" tabindex="0" aria-label="Glove categories — drag or use the arrows">
             <!-- MTB -->
             <div class="product-card">
                 <img src="assets/mtb.jpg" alt="Mountain biker wearing neon Gloves Galore MTB gloves" loading="lazy" class="product-img">
@@ -174,6 +171,17 @@
                 </div>
             </div>
 
+        </div>
+        <div class="carousel-controls">
+            <div class="carousel-progress" aria-hidden="true"><span class="carousel-progress-fill"></span></div>
+            <div class="carousel-nav">
+                <button type="button" class="carousel-btn" data-dir="-1" aria-label="Previous glove category" aria-controls="lines-carousel">
+                    <span class="material-symbols-outlined" aria-hidden="true">west</span>
+                </button>
+                <button type="button" class="carousel-btn" data-dir="1" aria-label="Next glove category" aria-controls="lines-carousel">
+                    <span class="material-symbols-outlined" aria-hidden="true">east</span>
+                </button>
+            </div>
         </div>
     </section>
 
