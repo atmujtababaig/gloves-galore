@@ -573,7 +573,7 @@ button {
     --title-top: clamp(6.25rem, 11vh, 9rem); /* never closer than ~20px to the header */
     --title-size: clamp(3.75rem, 10vw, 10rem);
     --title-line: calc(0.9 * var(--title-size));
-    --lines-above-helmet: 1.15; /* helmet top sits just inside the PARTNER line */
+    --lines-above-helmet: 0.8; /* desktop: helmet rises into the upper part of PARTNER → bigger rider */
     height: 100vh;
     height: 100svh; /* visible screen on phones (100vh hides the bottom behind the browser bar) */
     min-height: 560px;
