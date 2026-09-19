@@ -167,7 +167,15 @@ const org = {
     : undefined,
   sameAs: b.socials?.length ? b.socials : undefined,
 }
-const jsonLd = `<script type="application/ld+json">${JSON.stringify(org)}</script>`
+// WebSite = the name Google shows above the link in search results
+const website = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: b.name,
+  alternateName: b.alternateName?.length ? b.alternateName : undefined,
+  url: `${SITE_URL}/`,
+}
+const jsonLd = [website, org].map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('\n    ')
 files['index.html'] = files['index.html'].replace('<!-- SEO:JSONLD -->', jsonLd)
 for (const f of TEXT_FILES) files[f] = files[f].split('{{SITE_URL}}').join(SITE_URL)
 
