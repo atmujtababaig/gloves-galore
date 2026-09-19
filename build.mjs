@@ -6,7 +6,7 @@
 //   2. turns every PNG/JPG into a resized WebP and rewrites the references
 //   3. writes the current Sanity products into index.html (search engines see them without JS)
 //   4. fills in {{SITE_URL}}, business info (JSON-LD), sitemap.xml, robots.txt, 404.html
-import {readFile, writeFile, mkdir, rm, copyFile} from 'node:fs/promises'
+import {readFile, writeFile, mkdir, rm, copyFile, readdir} from 'node:fs/promises'
 import {existsSync} from 'node:fs'
 import path from 'node:path'
 import vm from 'node:vm'
@@ -212,8 +212,8 @@ await writeFile(path.join(OUT, '404.html'), `<!DOCTYPE html>
 if (config.customDomain) await writeFile(path.join(OUT, 'CNAME'), `${config.customDomain}\n`)
 
 // files that must sit at the site root (browsers and Google look for them there)
-for (const f of ['favicon.ico', 'site.webmanifest']) {
-  if (existsSync(path.join(ROOT, f))) await copyFile(path.join(ROOT, f), path.join(OUT, f))
+for (const f of await readdir(path.join(ROOT, 'favicon'))) {
+  await copyFile(path.join(ROOT, 'favicon', f), path.join(OUT, f))
 }
 
 // ---------- report ----------
