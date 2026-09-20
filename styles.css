@@ -4029,3 +4029,163 @@ body.menu-open .site-menu-side { opacity: 1; }
         font-size: 0.85rem;
     }
 }
+
+.site-menu-legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1rem;
+    margin-top: 0.9rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.site-menu-side .site-menu-legal a {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(244, 244, 237, 0.45);
+}
+
+.site-menu-side .site-menu-legal a:hover {
+    color: var(--color-neon);
+}
+
+/* ── One glove, its own page ── */
+.product-hero {
+    padding: clamp(7rem, 12vw, 9.5rem) 1.5rem clamp(2rem, 5vw, 4rem);
+}
+
+.product-hero-inner {
+    max-width: 80rem;
+    margin: 0 auto;
+    display: grid;
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    align-items: center;
+}
+
+.product-gallery {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+}
+
+.product-gallery:has(.product-shot + .product-shot) {
+    grid-template-columns: 1fr 1fr;
+}
+
+.product-shot {
+    position: relative;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.9rem;
+    overflow: hidden;
+}
+
+.product-shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 7% 7% 9%;
+    cursor: zoom-in;
+    transition: transform 0.4s ease;
+}
+
+.product-shot:hover img {
+    transform: scale(1.03);
+}
+
+.product-breadcrumb {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(244, 244, 237, 0.45);
+    margin-bottom: 1rem;
+}
+
+.product-breadcrumb a:hover {
+    color: var(--color-neon);
+}
+
+.product-title {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 0.92;
+    font-size: clamp(2.6rem, 8vw, 5rem);
+}
+
+.product-tag {
+    margin: 0.75rem 0 1.5rem;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-neon);
+}
+
+.product-lead {
+    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+    line-height: 1.75;
+    color: rgba(244, 244, 237, 0.78);
+    margin-bottom: 1rem;
+}
+
+.product-actions {
+    justify-content: flex-start;
+    margin-top: 1.75rem;
+}
+
+.product-hint {
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(244, 244, 237, 0.4);
+}
+
+.product-more {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+    margin-bottom: 2.5rem;
+}
+
+.product-more-item {
+    display: block;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.product-more-item:hover {
+    border-color: var(--color-neon);
+    transform: translateY(-3px);
+}
+
+.product-more-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 8% 8% 4%;
+}
+
+.product-more-item span {
+    display: block;
+    padding: 0 0.75rem 0.9rem;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-align: center;
+}
+
+/* the name plate on the work grid is a link now */
+.hg-label:hover .hg-name {
+    color: var(--color-neon);
+}

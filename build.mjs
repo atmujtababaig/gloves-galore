@@ -13,6 +13,7 @@ import vm from 'node:vm'
 import {fileURLToPath} from 'node:url'
 import {createHash} from 'node:crypto'
 import sharp from 'sharp'
+import {productPage} from './product-page.mjs'
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url))
 const OUT = path.join(ROOT, 'dist')
@@ -159,6 +160,31 @@ for (const page of PAGES) {
   })
 }
 
+// ---------- 3b. one page per glove, straight from Sanity ----------
+const connectSrc = files['connect.html']
+const grab = (re, what) => {
+  const m = connectSrc.match(re)
+  if (!m) throw new Error(`could not find the ${what} in connect.html`)
+  return m[0]
+}
+const navBlock = grab(/    <!-- Navbar -->[\s\S]*?    <!-- \/Navbar -->\r?\n/, 'navbar')
+const footerBlock = grab(/    <!-- Contact Footer -->[\s\S]*?<\/footer>\r?\n/, 'footer')
+const headBlock = grab(/    <!-- Fonts -->[\s\S]*?<link rel="stylesheet" href="styles\.css">\r?\n/, 'head assets')
+const preloaderBlock = grab(/    <!-- Page Preloader -->[\s\S]*?\r?\n    <\/div>\r?\n/, 'preloader')
+
+const withSlugs = products.map((p) => ({...p, slug: win.GG_slug(p.name)})).filter((p) => p.slug && p.img)
+const productPaths = []
+for (const [i, product] of withSlugs.entries()) {
+  const others = [1, 2, 3, 4].map((n) => withSlugs[(i + n) % withSlugs.length]).filter((o) => o.slug !== product.slug)
+  const file = `gloves/${product.slug}.html`
+  files[file] = productPage({
+    product, others, slug: product.slug, siteUrl: SITE_URL,
+    nav: navBlock, footer: footerBlock, headAssets: headBlock, preloader: preloaderBlock,
+  })
+  PAGES.push(file)
+  productPaths.push(`/gloves/${product.slug}/`)
+}
+
 // ---------- 4. SEO ----------
 const b = config.business
 const org = {
@@ -235,6 +261,7 @@ const today = new Date().toISOString().slice(0, 10)
 await writeFile(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${config.pages.map((p) => `  <url><loc>${SITE_URL}${p.path === '/' ? '/' : '/' + p.file.replace(/\.html$/, '') + '/'}</loc><lastmod>${today}</lastmod><priority>${p.priority}</priority></url>`).join('\n')}
+${productPaths.map((p) => `  <url><loc>${SITE_URL}${p}</loc><lastmod>${today}</lastmod><priority>0.6</priority></url>`).join('\n')}
 </urlset>
 `)
 await writeFile(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`)
@@ -264,6 +291,6 @@ if (files['forms.js'].includes('PASTE_APPS_SCRIPT_URL')) warnings.push('forms ar
 if (/1234567/.test(PAGES.map((p) => files[p]).join(''))) warnings.push('placeholder phone number (1234567) still on the site')
 
 console.log(`Built ${SITE_URL}`)
-console.log(`  ${products.length} products written into index.html`)
+console.log(`  ${products.length} products written into index.html, ${productPaths.length} glove pages built`)
 console.log(`  images: ${used.size} files, ${(before / 1048576).toFixed(1)} MB → ${(after / 1048576).toFixed(1)} MB`)
 for (const w of warnings) console.log(`  ⚠ ${w}`)

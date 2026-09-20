@@ -542,15 +542,17 @@ if (footerToTop) {
 
     // every product card on the site (home grid + category pages)
     document.addEventListener("click", (e) => {
-        const media = e.target.closest(".hg-media");
+        const media = e.target.closest(".hg-media, .product-shot");
         if (!media) return;
         const card = media.closest(".hg-item");
+        const pageTitle = document.querySelector(".product-title");
         const shown = media.querySelector(".hg-img-alt") && getComputedStyle(media.querySelector(".hg-img-alt")).opacity === "1"
             ? media.querySelector(".hg-img-alt")
             : media.querySelector("img");
         if (!shown) return;
         lastFocus = document.activeElement;
-        open(shown.currentSrc || shown.src, shown.alt, card ? (card.querySelector(".hg-name") || {}).textContent : "");
+        const label = card ? (card.querySelector(".hg-name") || {}).textContent : (pageTitle ? pageTitle.textContent : "");
+        open(shown.currentSrc || shown.src, shown.alt, label);
     });
 })();
 

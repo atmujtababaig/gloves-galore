@@ -11,6 +11,9 @@
 
     const frame = (mod) => `<svg class="hg-border hg-border--${mod}" viewBox="0 0 407 411" preserveAspectRatio="none" aria-hidden="true"><path class="n-desk" d="${NOTCH}"/><path class="n-wide" d="${NOTCH_WIDE}"/></svg>`;
 
+    // "Stealth Arrow" → "stealth-arrow": the folder each glove's own page lives in
+    root.GG_slug = (name) => String(name || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
     const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g,
         (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
@@ -23,7 +26,7 @@
                 <img src="${esc(p.img)}" alt="${esc(p.name)} gloves by Gloves Galore" loading="lazy" decoding="async" width="900" height="900">
                 ${p.hoverImg ? `<img class="hg-img-alt" src="${esc(p.hoverImg)}" alt="" aria-hidden="true" loading="lazy" decoding="async" width="900" height="900">` : ""}
             </div>
-            <div class="hg-label"><span class="hg-name">${esc(p.name)}</span><span class="hg-year">${esc(p.year)}</span></div>
+            <a class="hg-label" href="/gloves/${root.GG_slug(p.name)}/"><span class="hg-name">${esc(p.name)}</span><span class="hg-year">${esc(p.year)}</span></a>
         </article>`).join("");
 
     root.GG_productsQueryURL = (cfg) => {
