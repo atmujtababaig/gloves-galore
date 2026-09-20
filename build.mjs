@@ -196,12 +196,45 @@ for (const f of TEXT_FILES.filter((f) => /\.(css|js)$/.test(f))) {
   }
 }
 
-for (const [f, text] of Object.entries(files)) await writeFile(path.join(OUT, f), text)
+// ---------- 4b. clean URLs: /connect/ instead of /connect.html ----------
+// Pages move into their own folder. Every link (and every asset path, because the pages
+// now sit one level deep) becomes root-relative, and the old .html address redirects.
+const slugOf = (page) => page.replace(/\.html$/, '')
+for (const page of PAGES) {
+  let html = files[page]
+  for (const other of PAGES) {
+    if (other === 'index.html') continue
+    const to = `/${slugOf(other)}/`
+    html = html.split(`"${other}"`).join(`"${to}"`).split(`"${other}#`).join(`"${to}#`).split(`/${other}"`).join(`${to}"`)
+  }
+  html = html.split('"index.html"').join('"/"').split('"index.html#').join('"/#')
+  html = html.replace(/(["'(])(assets\/)/g, '$1/$2').replace(/(["'])((?:styles\.css|app\.js|forms\.js)(?:\?v=[a-f0-9]+)?)\1/g, '$1/$2$1')
+  files[page] = html
+}
+
+for (const [f, text] of Object.entries(files)) {
+  if (!PAGES.includes(f) || f === 'index.html') {
+    await writeFile(path.join(OUT, f), text)
+    continue
+  }
+  const slug = slugOf(f)
+  await mkdir(path.join(OUT, slug), {recursive: true})
+  await writeFile(path.join(OUT, slug, 'index.html'), text)
+  // the old address keeps working and points search engines at the new one
+  await writeFile(path.join(OUT, f), `<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Redirecting…</title>
+<link rel="canonical" href="${SITE_URL}/${slug}/">
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url=/${slug}/">
+<script>location.replace("/${slug}/" + location.search + location.hash)</script>
+</head><body><a href="/${slug}/">Continue to ${slug}</a></body></html>
+`)
+}
 
 const today = new Date().toISOString().slice(0, 10)
 await writeFile(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${config.pages.map((p) => `  <url><loc>${SITE_URL}${p.path}</loc><lastmod>${today}</lastmod><priority>${p.priority}</priority></url>`).join('\n')}
+${config.pages.map((p) => `  <url><loc>${SITE_URL}${p.path === '/' ? '/' : '/' + p.file.replace(/\.html$/, '') + '/'}</loc><lastmod>${today}</lastmod><priority>${p.priority}</priority></url>`).join('\n')}
 </urlset>
 `)
 await writeFile(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`)
