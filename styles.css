@@ -566,7 +566,7 @@ button {
 }
 
 /* ============================================================
-   HERO — "GRIP THE WORLD"  (rollback: restore files from _hero_backup/)
+   HERO, "GRIP THE WORLD"  (rollback: restore files from _hero_backup/)
    ============================================================ */
 .hero--grip {
     /* headline position/size; .hero-model uses the same values to place the helmet */
@@ -1510,7 +1510,7 @@ button {
 }
 
 /* ============================================================
-   SELECTED WORK — helmet-style notch grid  (Lando Norris style)
+   SELECTED WORK, helmet-style notch grid  (Lando Norris style)
    Cards render from products.js into #work-grid
    ============================================================ */
 .notch-gallery {
@@ -1920,7 +1920,7 @@ button {
 }
 
 /* ============================================================
-   MANUFACTURING PROCESS MAP — "FROM SCRATCH TO SHIPMENT"
+   MANUFACTURING PROCESS MAP, "FROM SCRATCH TO SHIPMENT"
    CSS custom properties mirror the site's design system.
    --color-bg:      #0D0D0D  (var --color-bg-dark)
    --color-accent:  #C8FF00  (var --color-neon)
@@ -2145,7 +2145,7 @@ button {
 }
 
 /* ================================================================
-   TABLET  (768px – 1199px) — 2-col grid, vertical connectors hidden,
+   TABLET  (768px, 1199px), 2-col grid, vertical connectors hidden,
    row-backward resets to normal column flow
    ================================================================ */
 @media (max-width: 1199px) {
@@ -2197,7 +2197,7 @@ button {
 }
 
 /* ================================================================
-   MOBILE  (< 768px) — single column, vertical dashed line on left
+   MOBILE  (< 768px), single column, vertical dashed line on left
    ================================================================ */
 @media (max-width: 767px) {
 
@@ -3028,7 +3028,7 @@ button {
 }
 
 /* ============================================================
-   LEGAL PAGES — privacy.html, terms.html, shipping.html
+   LEGAL PAGES, privacy.html, terms.html, shipping.html
    ============================================================ */
 .legal-hero {
     padding-bottom: clamp(2.5rem, 5vw, 4rem);
@@ -3058,7 +3058,7 @@ button {
     align-items: start;
 }
 
-/* "On this page" list — sticks beside the text on desktop */
+/* "On this page" list, sticks beside the text on desktop */
 .legal-toc {
     position: sticky;
     top: 7rem;
@@ -3750,7 +3750,7 @@ button {
                 background-color 0.2s ease;
 }
 
-/* three chevron-length bars — the same stepped rhythm as the glove print */
+/* three chevron-length bars, the same stepped rhythm as the glove print */
 .menu-bar--1 { width: 1.9rem; }
 .menu-bar--2 { width: 1.35rem; }
 .menu-bar--3 { width: 1.9rem; }
@@ -3849,7 +3849,7 @@ body.menu-open .menu-link {
     transition: opacity 0.45s ease var(--d, 0s), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s), color 0.2s ease;
 }
 
-/* hovering one link dims the rest — attention goes where the cursor is */
+/* hovering one link dims the rest, attention goes where the cursor is */
 body.menu-open .site-menu-links:hover .menu-link { opacity: 0.35; }
 body.menu-open .site-menu-links .menu-link:hover,
 body.menu-open .site-menu-links .menu-link:focus-visible {
@@ -3866,7 +3866,7 @@ body.menu-open .site-menu-links .menu-link:focus-visible {
     min-width: 2.6ch;
 }
 
-/* outline numerals — falls back to solid neon where text-stroke is unsupported */
+/* outline numerals, falls back to solid neon where text-stroke is unsupported */
 @supports (-webkit-text-stroke: 1px black) {
     .menu-index {
         color: transparent;
@@ -3994,7 +3994,7 @@ body.menu-open .site-menu-side { opacity: 1; }
 }
 
 /* short laptop screens: the extra spacing between categories must not push
-   CONTACT off the bottom — .site-menu is overflow:hidden, so it would clip */
+   CONTACT off the bottom, .site-menu is overflow:hidden, so it would clip */
 @media (min-width: 768px) and (max-height: 820px) {
     .site-menu-links { gap: clamp(0.15rem, 0.6vh, 0.5rem); }
     .menu-link { font-size: clamp(1.8rem, 4.6vw, 3.4rem); }
@@ -4107,7 +4107,7 @@ body.menu-open .site-menu-side { opacity: 1; }
     color: var(--color-neon);
 }
 
-.product-title {
+.glove-title {
     font-family: var(--font-display);
     font-weight: 900;
     text-transform: uppercase;
@@ -4189,3 +4189,47 @@ body.menu-open .site-menu-side { opacity: 1; }
 .hg-label:hover .hg-name {
     color: var(--color-neon);
 }
+
+/* the whole card opens the glove's page; the corner button opens the photo */
+.hg-link {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+}
+
+.hg-zoom {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    z-index: 3;
+    width: 2.25rem;
+    height: 2.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(13, 13, 13, 0.75);
+    color: var(--color-neon);
+    border: 1px solid rgba(200, 255, 0, 0.35);
+    border-radius: 5px;
+    cursor: zoom-in;
+    opacity: 0;
+    transition: opacity 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.hg-zoom .material-symbols-outlined { font-size: 1.15rem; }
+
+.hg-item:hover .hg-zoom,
+.hg-zoom:focus-visible { opacity: 1; }
+
+.hg-zoom:hover {
+    background: var(--color-neon);
+    color: #000;
+}
+
+/* touch screens have no hover, so the button stays visible there */
+@media (hover: none) {
+    .hg-zoom { opacity: 1; }
+}
+
+.hg-media img { cursor: pointer; }

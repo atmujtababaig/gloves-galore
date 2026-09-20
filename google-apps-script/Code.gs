@@ -1,9 +1,9 @@
 /**
- * Gloves Galore — website forms → your Gmail  (free, runs inside your own Google account)
+ * Gloves Galore, website forms → your Gmail  (free, runs inside your own Google account)
  *
  * What it does for every form on the website:
  *   • emails you the message (with the client's tech pack attached), Reply goes to the client
- *   • adds a row to the "Gloves Galore — website leads" Google Sheet (created on first message)
+ *   • adds a row to the "Gloves Galore, website leads" Google Sheet (created on first message)
  *
  * Setup (one time): script.google.com → New project → paste this file →
  *   Deploy → New deployment → type "Web app" → Execute as: Me, Who has access: Anyone →
@@ -12,7 +12,7 @@
  */
 
 const NOTIFY_EMAIL = '';                     // empty = the Google account that deployed this script
-const SHEET_NAME = 'Gloves Galore — website leads';
+const SHEET_NAME = 'Gloves Galore, website leads';
 const MAX_FILE_BYTES = 20 * 1024 * 1024;     // Gmail limit is 25 MB per email
 const MIN_FILL_MS = 2500;                     // real people take longer than this to fill a form
 

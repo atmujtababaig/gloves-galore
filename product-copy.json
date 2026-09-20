@@ -1,0 +1,43 @@
+{
+  "_help": "Two paragraphs of copy for each glove page. The slug matches the product name in Sanity (Stealth Arrow -> stealth-arrow). A glove with no entry here falls back to the generic text in product-page.mjs.",
+  "stealth-arrow": [
+    "Stealth Arrow is the plain black one, and that is the whole point of it. A matte black shell carries nothing but our white shield on the back of the hand and four rows of white chevrons running down the fingers, so the only colour on the glove is the colour a brand decides to put there.",
+    "This is the build most of our customers start from, because a single shell like this can become a trail glove, a race glove or a team glove without changing the pattern. Tell us the colours you want in place of the white and we will sample it in your palette."
+  ],
+  "magma": [
+    "Magma puts a molten red and orange swirl across the fingers, the thumb and the sides of the hand, then drops a flat black panel over the back so the shield still reads from a distance. A hook and loop strap closes the cuff, which keeps the glove in place when the print is the loudest thing on the bike.",
+    "Prints like this are sublimated, so the pattern goes right to the edge of every panel and a full colour artwork costs no more than a two colour one. Send us your own graphic and we will lay it onto the same pattern."
+  ],
+  "armor-pro": [
+    "Armor Pro is the protective one. A moulded shell sits over the knuckles with the shield raised into it, the fingers carry rubberised chevrons, the cuff is perforated for air and the closure strap has our name embossed into it. The side of the hand stays mesh so the glove still breathes under all of that.",
+    "This is the build to ask about when your riders are on dirt bikes or in a bike park. The hard parts can be softened, hardened or moved, and the whole glove can come out in your colours with your logo where ours sits now."
+  ],
+  "volt-arrow": [
+    "Volt Arrow is the same shell as Stealth Arrow in fluorescent yellow, with black chevrons down the fingers, a black cuff strap and a black thumb panel. It is the colourway riders pick when they want to be seen on a road or a trail in bad light.",
+    "Any bright shell we can print in this yellow we can also print in your own high visibility colour, and the chevrons can become your pattern instead of ours."
+  ],
+  "zebra-strike": [
+    "Zebra Strike runs black and white in two directions at once. Straight bands cover the fingers, a torn wave pattern breaks across the back of the hand, and the shield sits in the middle of it in outline so the graphic still wins. The palm and the thumb stay black.",
+    "A two colour graphic like this is the cheapest way to make a glove look expensive, and it works just as well in a brand's own two colours. Give us your pair and we will redraw it on this pattern."
+  ],
+  "venom-line": [
+    "Venom Line is built out of sweeping panels. Grey and black shapes fan out from the wrist, green lines cut across them, and the shield sits in the middle in the same green. It reads as movement even when the glove is lying flat on a table.",
+    "Line work like this suits a brand with a strong colour of its own, because the green can be swapped for yours and the rest of the glove stays exactly as it is."
+  ],
+  "aqua-swirl": [
+    "Aqua Swirl is a navy glove with a turquoise liquid pattern poured over the fingers and the back of the hand. The white shield sits on top of it, and the thumb and the palm side stay dark so the print does not fight the grip.",
+    "The swirl is a full colour print, so it can come out in any two colours you name. Brands often take this one and run it in their own shades for a summer drop."
+  ],
+  "red-arrow": [
+    "Red Arrow fades from a deep red at the wrist into black at the fingertips, with white chevrons stepping down each finger and the white shield square on the back of the hand. The cuff closes with a black strap that stays clear of a watch.",
+    "The fade is the interesting part: it can run from any colour into any other, which makes this the pattern brands choose when they want their two colours on one glove."
+  ],
+  "toxic-pixel": [
+    "Toxic Pixel is a half finger build. Green digital camo prints across a mesh back, black overlays sit on the knuckles and the finger tops, and the shield is a rubberised black badge rather than a print. The fingers are cut short above the knuckle and the cuff closes with a strap.",
+    "Short finger gloves sell hard in the gym and on the street, and this same shell can be produced full finger so a brand gets both cuts from one design."
+  ],
+  "blaze-pixel": [
+    "Blaze Pixel is the orange version of the same half finger build. The digital camo prints over a breathable mesh back, the black overlays and the rubberised shield badge stay where they are, and the cut stops just above the knuckle.",
+    "Running one design in two colourways, like this one and Toxic Pixel, is the cheapest way to fill a shelf. We can do the same with your artwork in as many colourways as you want."
+  ]
+}

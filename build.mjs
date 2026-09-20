@@ -172,13 +172,14 @@ const footerBlock = grab(/    <!-- Contact Footer -->[\s\S]*?<\/footer>\r?\n/, '
 const headBlock = grab(/    <!-- Fonts -->[\s\S]*?<link rel="stylesheet" href="styles\.css">\r?\n/, 'head assets')
 const preloaderBlock = grab(/    <!-- Page Preloader -->[\s\S]*?\r?\n    <\/div>\r?\n/, 'preloader')
 
+const productCopy = JSON.parse(await read('product-copy.json'))
 const withSlugs = products.map((p) => ({...p, slug: win.GG_slug(p.name)})).filter((p) => p.slug && p.img)
 const productPaths = []
 for (const [i, product] of withSlugs.entries()) {
   const others = [1, 2, 3, 4].map((n) => withSlugs[(i + n) % withSlugs.length]).filter((o) => o.slug !== product.slug)
   const file = `gloves/${product.slug}.html`
   files[file] = productPage({
-    product, others, slug: product.slug, siteUrl: SITE_URL,
+    product, others, slug: product.slug, siteUrl: SITE_URL, copy: productCopy[product.slug],
     nav: navBlock, footer: footerBlock, headAssets: headBlock, preloader: preloaderBlock,
   })
   PAGES.push(file)

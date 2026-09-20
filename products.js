@@ -1,5 +1,5 @@
 /* ============================================================
-   GLOVES GALORE — PRODUCT LIST  ("SELECTED WORK" grid)
+   GLOVES GALORE, PRODUCT LIST  ("SELECTED WORK" grid)
    ------------------------------------------------------------
    Yahan se products add / delete karo. Baaki kahin haath lagane
    ki zaroorat NAHI. Ek product = ek block { ... },  copy-paste

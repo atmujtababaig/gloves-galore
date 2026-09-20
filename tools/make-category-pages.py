@@ -24,12 +24,12 @@ CATS = [
         file="mtb-gloves.html",
         process=[
             ("Send the idea", "A tech pack, a sketch, or photos of the glove your riders are already wearing out. Tell us the trail, we work back from there."),
-            ("We sample it", "One pair, built the way you described. Samples are free — you only pay the courier."),
+            ("We sample it", "One pair, built the way you described. Samples are free, you pay only the courier."),
             ("Ride it, then tell us", "Palm too thick on the bar, cuff catching the sleeve, grip print in the wrong place? We change it and re-sample."),
             ("Production and packaging", "The approved pair becomes the standard. Every glove is checked against it, then packed in your branded packaging."),
         ],
         small_order_h2="TWENTY PAIRS OR TWO THOUSAND, <span class=\"outline-text\">SAME ANSWER</span>",
-        small_order="A trail crew that wants matching gloves, a bike shop testing its first own-brand run, a brand ordering for a season — we quote all three. There is no minimum we hold you to, because the shop that orders fifty pairs this year is the one ordering five hundred the next.",
+        small_order="A trail crew that wants matching gloves, a bike shop testing its first own-brand run, a brand ordering for a season: we quote all three. There is no minimum we hold you to, because the shop that orders fifty pairs this year is the one ordering five hundred the next.",
         nav="MTB",
         name="MTB gloves",
         title_html="MTB<br><span class=\"outline-text\">GLOVES</span>",
@@ -68,7 +68,7 @@ CATS = [
             ("Production and packaging", "Approved sample becomes the benchmark, every pair is checked against it, then packed with your branding."),
         ],
         small_order_h2="TEAM RUNS ARE <span class=\"outline-text\">WELCOME</span>",
-        small_order="Most suppliers will not answer an email about twenty pairs. We will. Riders, crews and shops get the same sampling, the same checks and the same packaging as a brand ordering for a whole season — the only difference is the number on the invoice.",
+        small_order="Most suppliers will not answer an email about twenty pairs. We will. Riders, crews and shops get the same sampling, the same checks and the same packaging as a brand ordering for a whole season. The only difference is the number on the invoice.",
         nav="BMX",
         name="BMX gloves",
         title_html="BMX<br><span class=\"outline-text\">GLOVES</span>",
@@ -76,7 +76,7 @@ CATS = [
         hero_alt="BMX rider in a skatepark bowl wearing custom Gloves Galore BMX gloves",
         seo_title="Custom BMX Gloves Manufacturer | Gloves Galore, Sialkot",
         description="Private-label BMX gloves made in Sialkot, Pakistan. Park, street and race gloves in your colours with your logo. Free samples, small team orders welcome.",
-        subtitle="Park, street and race gloves for brands, shops and teams — built in your colours.",
+        subtitle="Park, street and race gloves for brands, shops and teams, built in your colours.",
         lead_h2="BMX GLOVES THAT SURVIVE <span class=\"outline-text\">THE SESSION</span>",
         lead=[
             "BMX is hard on gloves. Bars, pegs, concrete and the odd crash all land on the same two square inches of palm, so we build BMX gloves with the seams and the palm layout that take that abuse, not the ones that look best on a spec sheet.",
@@ -86,14 +86,14 @@ CATS = [
         specs=[
             ("Reinforced palm", "A second layer or a wear patch where the bar sits, so the palm does not open up after a few weeks of riding."),
             ("Crash-ready seams", "Flatlock or double-stitched seams at the stress points, kept off the inside of the hand so nothing rubs."),
-            ("Printed knuckles", "Sublimated graphics, screen print or a raised silicone print across the back of the hand — good for team colours and sponsor logos."),
+            ("Printed knuckles", "Sublimated graphics, screen print or a raised silicone print across the back of the hand, good for team colours and sponsor logos."),
             ("Team colourways", "One design, several colourways, no extra tooling. Useful when every rider on the team wants their own look."),
             ("Neoprene cuff", "Low-profile slip-on cuff with a pull tab that stays out of the way of a watch or a wrist brace."),
             ("Half-finger option", "The same pattern cut short for street and park riders who want their fingertips free."),
         ],
         process_h2="FROM IDEA TO <span class=\"outline-text\">BOXED STOCK</span>",
         faq=[
-            ("We are a team, not a brand. Is that fine?", "Completely. Small runs are welcome — even a single team's worth of gloves. You get the same sampling and the same production line as a brand order."),
+            ("We are a team, not a brand. Is that fine?", "Completely. Small runs are welcome, even a single team's worth of gloves. You get the same sampling and the same production line as a brand order."),
             ("Can we put sponsor logos on them?", "Yes, as many as the design can carry. Sublimation prints full-colour logos with no extra cost per colour."),
             ("How do we send our artwork?", "PDF, AI, PSD or PNG, whatever you have. Upload it on the contact page or send it on WhatsApp and we will tell you if anything needs fixing before printing."),
         ],
@@ -115,16 +115,16 @@ CATS = [
         hero_alt="Motocross rider on a dirt bike wearing custom Gloves Galore MX gloves",
         seo_title="Custom Motocross (MX) Gloves Manufacturer | Gloves Galore, Sialkot",
         description="Private-label motocross gloves made in Sialkot, Pakistan: knuckle protection, reinforced palms, your graphics and your logo. Free samples, small orders welcome.",
-        subtitle="Dirt, dust and full throttle — motocross gloves built around your graphics.",
+        subtitle="Dirt, dust and full throttle: motocross gloves built around your graphics.",
         lead_h2="MOTOCROSS GLOVES FOR <span class=\"outline-text\">YOUR BRAND</span>",
         lead=[
             "MX gloves have to do two jobs at once: keep the rider's grip on a bike that fights back, and take a hit from roost, a branch or the ground. We build the protection into the pattern rather than gluing it on at the end, so the glove still closes around the grip.",
-            "Graphics matter as much as construction in motocross. Sublimation lets us print your full kit design across the back of the hand, so gloves, jersey and pants finally match — printed and stitched here in Sialkot.",
+            "Graphics matter as much as construction in motocross. Sublimation lets us print your full kit design across the back of the hand, so gloves, jersey and pants finally match, printed and stitched here in Sialkot.",
         ],
         specs_h2="WHAT WE CAN BUILD INTO YOUR <span class=\"outline-text\">MX GLOVE</span>",
         specs=[
             ("Knuckle protection", "TPR or moulded knuckle guards, or a lighter padded knuckle if your riders prefer feel over armour."),
-            ("Reinforced palm", "Synthetic leather palm with extra layers at the thumb crotch and heel — the two places MX gloves fail first."),
+            ("Reinforced palm", "Synthetic leather palm with extra layers at the thumb crotch and heel, the two places MX gloves fail first."),
             ("Full-kit graphics", "Sublimated prints that match your jersey and pants, edge to edge, in any number of colours."),
             ("Adjustable cuff", "Hook-and-loop closure or a slip-on cuff, sized to sit under or over a boot-style wrist brace."),
             ("Vented top", "Perforated panels and mesh gussets between the fingers to move heat out on long motos."),
@@ -146,7 +146,7 @@ CATS = [
             ("Production and packaging", "Production matched to the approved sample, checked pair by pair, then packed retail-ready with your branding."),
         ],
         small_order_h2="ONE GYM IS <span class=\"outline-text\">ENOUGH</span>",
-        small_order="You do not need a warehouse to start selling your own gloves. A single gym's stock, a coach's first branded run, a supplement brand testing merch — all of it is a real order here. Start small, see how they sell, then come back for more.",
+        small_order="You do not need a warehouse to start selling your own gloves. A single gym's stock, a coach's first branded run, a supplement brand testing merch: all of it is a real order here. Start small, see how they sell, then come back for more.",
         nav="Gym",
         name="gym gloves",
         title_html="GYM &amp; LIFTING<br><span class=\"outline-text\">GLOVES</span>",
@@ -154,7 +154,7 @@ CATS = [
         hero_alt="Athlete in a gym wearing custom Gloves Galore weightlifting gloves",
         seo_title="Custom Gym &amp; Weightlifting Gloves Manufacturer | Gloves Galore, Sialkot",
         description="Private-label gym and weightlifting gloves made in Sialkot, Pakistan: padded palms, wrist wraps, your logo and packaging. Free samples, small orders welcome.",
-        subtitle="Lifting gloves for gyms, coaches and fitness brands — your logo, your packaging.",
+        subtitle="Lifting gloves for gyms, coaches and fitness brands, your logo, your packaging.",
         lead_h2="LIFTING GLOVES FOR GYMS AND <span class=\"outline-text\">FITNESS BRANDS</span>",
         lead=[
             "Gym gloves live or die on the palm. Too thick and the bar feels far away, too thin and the calluses come back. We build the padding around what your members actually lift, and we can make the same design in a padded and an unpadded version.",
@@ -173,7 +173,7 @@ CATS = [
         faq=[
             ("We are one gym, we do not need thousands of pairs.", "That is fine. We take small orders, including a single gym's stock. There is no minimum we hold you to."),
             ("Can you make them for women's sizes too?", "Yes. We grade patterns from XS upward rather than shrinking a men's glove, which is what usually makes small sizes fit badly."),
-            ("Do you supply retail packaging?", "Yes — hang tags, polybags, boxes and barcode labels with your artwork, ready for a shelf."),
+            ("Do you supply retail packaging?", "Yes: hang tags, polybags, boxes and barcode labels with your artwork, ready for a shelf."),
         ],
     ),
     dict(
@@ -220,14 +220,14 @@ CATS = [
 # Default wording; each category overrides it below so no two pages read the same.
 PROCESS = [
     ("Tell us the idea", "A tech pack, a sketch on paper, photos, or a glove you already own. Whatever you have is enough to start."),
-    ("We sample it", "We build one pair the way you described it. Samples are free — you only pay the courier."),
+    ("We sample it", "We build one pair the way you described it. Samples are free, you pay only the courier."),
     ("You change what you want", "Palm too thick, cuff too short, colour off? We adjust and re-sample until the glove is right."),
     ("Production and packaging", "Approved sample goes into production, every pair is checked, then packed in your branded packaging and shipped."),
 ]
 
 SMALL_ORDER = (
     "NO MINIMUM ORDER, <span class=\"outline-text\">REALLY</span>",
-    "Most suppliers will not talk to you under a thousand pairs. We will. A single team, a gym, a shop testing its first own-brand glove — we take the small order and we take it seriously, because small orders turn into repeat orders. Tell us how many you actually need and we will quote that number.",
+    "Most suppliers will not talk to you under a thousand pairs. We will. A single team, a gym, a shop testing its first own-brand glove. We take the small order and we take it seriously, because small orders turn into repeat orders. Tell us how many you actually need and we will quote that number.",
 )
 
 
@@ -394,7 +394,7 @@ def category_page(cat, offset):
     <section class="cat-section">
         <div class="cat-shell">
             <h2 class="cat-h2">FROM OUR OWN <span class="outline-text">RANGE</span></h2>
-            <p class="cat-note">These are gloves we have already built. Any one of them can be rebuilt in your colours, your materials and your branding — or we can start from a blank sheet.</p>
+            <p class="cat-note">These are gloves we have already built. Any one of them can be rebuilt in your colours, your materials and your branding, or we can start from a blank sheet.</p>
             <div class="helmet-grid" data-products="4" data-offset="{offset}"></div>
             <a class="cat-more" href="index.html#work">See the full range <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
         </div>
@@ -451,8 +451,8 @@ def category_page(cat, offset):
 
 
 ABOUT_LEAD = [
-    "Gloves Galore makes custom gloves for other people's brands, teams and shops. We do not sell a range under our own name — your logo is the only one on the finished pair.",
-    "We are based in Sialkot, Pakistan, where sports gear has been made for over a century. We do the whole glove ourselves — design, patterns, cutting, stitching, printing, checking and packing — so when you ask for a change, it is us making it, not a middleman passing the message on. One thing we do differently from the big names here: we take the small orders too.",
+    "Gloves Galore makes custom gloves for other people's brands, teams and shops. We do not sell a range under our own name. Your logo is the only one on the finished pair.",
+    "We are based in Sialkot, Pakistan, where sports gear has been made for over a century. We do the whole glove ourselves: design, patterns, cutting, stitching, printing, checking and packing, so when you ask for a change, it is us making it, not a middleman passing the message on. One thing we do differently from the big names here: we take the small orders too.",
 ]
 
 ABOUT_BLOCKS = [
@@ -461,7 +461,7 @@ ABOUT_BLOCKS = [
     ("How we price", "Materials plus work, with no minimum we hold you to. Tell us the quantity you actually need and the price you want to land on, and we will tell you honestly what is possible at that number."),
     ("Materials", "The usual palm, mesh and stretch materials we already work with. If your design needs a fabric, insulation or hardware we do not keep, we source it for you before sampling instead of pushing you toward what is easy for us."),
     ("Samples", "Samples are free. You pay the courier, we pay for the glove. Nothing goes into production until you have held the sample and said yes."),
-    ("Quality control", "Every pair is checked before it is packed — stitching, print, sizing and the small things that make a customer send a glove back."),
+    ("Quality control", "Every pair is checked before it is packed: stitching, print, sizing and the small things that make a customer send a glove back."),
 ]
 
 
@@ -488,7 +488,7 @@ def about_page():
         <div class="cat-hero-content">
             <span class="connect-eyebrow">About us</span>
             <h1 class="connect-title">WE MAKE GLOVES<br><span class="outline-text">FOR YOUR BRAND</span></h1>
-            <p class="connect-subtitle">Custom gloves out of Sialkot, Pakistan — built to your design and sold under your name, not ours.</p>
+            <p class="connect-subtitle">Custom gloves out of Sialkot, Pakistan, built to your design and sold under your name, not ours.</p>
         </div>
     </section>
 
@@ -527,7 +527,7 @@ def about_page():
             <div class="cat-cta">
                 <div>
                     <h3>Talk to us</h3>
-                    <p>WhatsApp, email or the contact form — whichever is easiest.</p>
+                    <p>WhatsApp, email or the contact form, whichever is easiest.</p>
                 </div>
                 <div class="cat-cta-actions">
                     <a class="btn-explore" href="connect.html">Start your order <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
@@ -540,7 +540,7 @@ def about_page():
     return shell(
         "about.html",
         "About Gloves Galore | Custom Glove Manufacturer in Sialkot",
-        "Gloves Galore is a private-label glove manufacturer in Sialkot, Pakistan. We build MTB, BMX, motocross, gym and ski gloves for other brands, teams and shops — free samples, no minimum order.",
+        "Gloves Galore is a private-label glove manufacturer in Sialkot, Pakistan. We build MTB, BMX, motocross, gym and ski gloves for other brands, teams and shops, free samples, no minimum order.",
         jsonld,
         body,
     )

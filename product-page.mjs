@@ -3,40 +3,32 @@
 // them can be changed for a client. Nothing here invents specs for a specific glove.
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]))
 
-const CHANGEABLE = [
-  ['Colours', 'Any colourway you want, including matching your kit or team palette. Sublimation prints full colour with no extra cost per colour.'],
-  ['Your branding', 'Your logo on the back of the hand, the cuff or the palm — printed, silicone-raised or embroidered. Ours never goes on.'],
-  ['Palm material', 'Synthetic leather, microfibre or a lighter single-layer palm, with reinforcement where your riders wear gloves out.'],
-  ['Grip and print', 'Silicone grip on the fingertips or across the palm, in any pattern, plus touchscreen thread on the index and thumb.'],
-  ['Cut and cuff', 'Full-finger or half-finger, slip-on or a hook-and-loop cuff, and sizing graded to your own size chart.'],
-  ['Packaging', 'Hang tags, polybags, boxes and barcode labels with your artwork, ready for a shelf.'],
-]
-
 const STEPS = [
   ['Tell us what to change', 'Point at this glove and tell us what should be different: colours, palm, print, cuff, sizes.'],
-  ['We sample it', 'You get one pair built to that spec, free — the courier is the only thing you pay for.'],
+  ['We sample it', 'You get one pair built to that spec, free. The courier is the only thing you pay for.'],
   ['You approve it', 'Wear it, break it if you can, and tell us what to fix. We re-sample until it is right.'],
   ['Production', 'Every pair is checked against your approved sample, then packed in your branded packaging.'],
 ]
 
 const abs = (src, siteUrl) => (src.startsWith('http') ? src : siteUrl + '/' + src.replace(/^\//, ''))
 
-export function productPage({product, others, nav, footer, headAssets, preloader, siteUrl, slug}) {
+const FALLBACK = [
+  'This is a glove we build ourselves, and it is here to be changed. Colour, palm material, print, cuff and sizing are all open, and your logo is the only one that goes on the finished pair.',
+  "There is no minimum order to clear first. A team's worth of gloves is a real order here, and so is a full season of stock. The first sample is on us and you only pay the courier.",
+]
+
+export function productPage({product, others, nav, footer, headAssets, preloader, siteUrl, slug, copy}) {
   const name = product.name
   const title = name + ' Gloves | Custom Made by Gloves Galore'
-  const description = name + ' — one of our own glove builds. Rebuilt in your colours, your materials and your branding, with free samples and no minimum order. Made in Sialkot, Pakistan.'
+  const first = (Array.isArray(copy) && copy[0]) || ''
+  const description = (first ? first.slice(0, 150).replace(/\s+\S*$/, '') + '. ' : '')
+    + 'Made to order in your colours with your branding, in Sialkot, Pakistan.'
   const shots = [product.img, product.hoverImg].filter(Boolean)
 
   const gallery = shots.map((src, i) => `
                     <div class="product-shot${i === 0 ? ' is-first' : ''}">
                         <img src="${esc(src)}" alt="${esc(name)} gloves by Gloves Galore${i ? ', second angle' : ''}" width="900" height="900" ${i ? 'loading="lazy"' : 'fetchpriority="high"'} decoding="async">
                     </div>`).join('')
-
-  const changeable = CHANGEABLE.map(([t, d]) => `
-                    <li class="cat-spec">
-                        <h3>${esc(t)}</h3>
-                        <p>${esc(d)}</p>
-                    </li>`).join('')
 
   const steps = STEPS.map(([t, d], i) => `
                     <li class="cat-step">
@@ -67,6 +59,9 @@ export function productPage({product, others, nav, footer, headAssets, preloader
       address: {'@type': 'PostalAddress', addressLocality: 'Sialkot', addressRegion: 'Punjab', addressCountry: 'PK'},
     },
   })
+
+  const text = (Array.isArray(copy) && copy.length ? copy : FALLBACK)
+  const paragraphs = text.map((t) => `                    <p class="product-lead">${esc(t)}</p>`).join('\n')
 
   const breadcrumb = JSON.stringify({
     '@context': 'https://schema.org',
@@ -118,24 +113,14 @@ ${nav}
                 </div>
                 <div class="product-intro">
                     <p class="product-breadcrumb"><a href="/">Home</a> <span aria-hidden="true">/</span> <a href="/#work">Gloves</a></p>
-                    <h1 class="product-title">${esc(name)}</h1>
+                    <h1 class="glove-title">${esc(name)}</h1>
                     <p class="product-tag">Our own build${product.year ? ' · ' + esc(product.year) : ''}</p>
-                    <p class="product-lead">This is a glove we build ourselves. Every part of it — colour, palm, print, cuff, sizing, packaging — can be changed for your brand, and your logo is the only one that goes on the finished pair.</p>
-                    <p class="product-lead">No minimum order: a team's worth of gloves is a real order here, and so is a full season's stock. Samples are free, you only pay the courier.</p>
+${paragraphs}
                     <div class="cat-hero-actions product-actions">
                         <a class="btn-explore" href="/connect/">Get this in your colours <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
-                        <a class="btn-primary" href="https://wa.me/923141632509" target="_blank" rel="noopener noreferrer">WhatsApp us</a>
                     </div>
                     <p class="product-hint">Click the photo to open it big and zoom in.</p>
                 </div>
-            </div>
-        </section>
-
-        <section class="cat-section cat-section--alt">
-            <div class="cat-shell">
-                <h2 class="cat-h2">WHAT YOU CAN CHANGE ON <span class="outline-text">THIS GLOVE</span></h2>
-                <ul class="cat-specs">${changeable}
-                </ul>
             </div>
         </section>
 

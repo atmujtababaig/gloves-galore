@@ -1,5 +1,5 @@
 /* ============================================================
-   SELECTED WORK — card markup + Sanity query (shared)
+   SELECTED WORK, card markup + Sanity query (shared)
    Used by app.js in the browser AND by build.mjs, which writes
    the cards straight into index.html so search engines see them.
    ============================================================ */
@@ -22,6 +22,8 @@
         <article class="hg-item${reveal ? " hg-reveal" : ""}">
             ${frame("base")}
             ${frame("lime")}
+            <a class="hg-link" href="/gloves/${root.GG_slug(p.name)}/" aria-label="${esc(p.name)} gloves"></a>
+            <button type="button" class="hg-zoom" aria-label="Open the ${esc(p.name)} photo" data-zoom-card><span class="material-symbols-outlined" aria-hidden="true">zoom_in</span></button>
             <div class="hg-media${p.hoverImg ? " has-alt" : ""}">
                 <img src="${esc(p.img)}" alt="${esc(p.name)} gloves by Gloves Galore" loading="lazy" decoding="async" width="900" height="900">
                 ${p.hoverImg ? `<img class="hg-img-alt" src="${esc(p.hoverImg)}" alt="" aria-hidden="true" loading="lazy" decoding="async" width="900" height="900">` : ""}

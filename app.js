@@ -344,7 +344,7 @@ if (lenis) {
 }
 
 // ============================================================
-// SELECTED WORK — render helmet-style notch grid
+// SELECTED WORK, render helmet-style notch grid
 // Source: Sanity CMS (sanity-config.js) → falls back to products.js
 // ============================================================
 async function loadWorkProducts() {
@@ -542,10 +542,12 @@ if (footerToTop) {
 
     // every product card on the site (home grid + category pages)
     document.addEventListener("click", (e) => {
-        const media = e.target.closest(".hg-media, .product-shot");
+        const zoomBtn = e.target.closest("[data-zoom-card]");
+        const media = zoomBtn ? zoomBtn.closest(".hg-item").querySelector(".hg-media") : e.target.closest(".product-shot");
         if (!media) return;
+        if (zoomBtn) e.preventDefault();
         const card = media.closest(".hg-item");
-        const pageTitle = document.querySelector(".product-title");
+        const pageTitle = document.querySelector(".glove-title");
         const shown = media.querySelector(".hg-img-alt") && getComputedStyle(media.querySelector(".hg-img-alt")).opacity === "1"
             ? media.querySelector(".hg-img-alt")
             : media.querySelector("img");
