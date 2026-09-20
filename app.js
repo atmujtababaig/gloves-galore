@@ -410,3 +410,145 @@ if (footerToTop) {
         }
     });
 }
+
+// ── Product image viewer: click a glove photo to open it big and zoom in ──
+(function initImageViewer() {
+    const MAX = 5, MIN = 1;
+    let box, img, stage, level, zoomIn, zoomOut, nameEl;
+    let scale = 1, x = 0, y = 0, lastFocus = null;
+
+    function build() {
+        box = document.createElement("div");
+        box.className = "gg-lb";
+        box.setAttribute("role", "dialog");
+        box.setAttribute("aria-modal", "true");
+        box.setAttribute("aria-label", "Product photo");
+        box.innerHTML = `
+            <div class="gg-lb-bar">
+                <span class="gg-lb-name"></span>
+                <div class="gg-lb-tools">
+                    <button type="button" class="gg-lb-btn" data-zoom="out" aria-label="Zoom out"><span class="material-symbols-outlined" aria-hidden="true">zoom_out</span></button>
+                    <span class="gg-lb-level">100%</span>
+                    <button type="button" class="gg-lb-btn" data-zoom="in" aria-label="Zoom in"><span class="material-symbols-outlined" aria-hidden="true">zoom_in</span></button>
+                    <button type="button" class="gg-lb-btn" data-close aria-label="Close"><span class="material-symbols-outlined" aria-hidden="true">close</span></button>
+                </div>
+            </div>
+            <div class="gg-lb-stage"><img class="gg-lb-img" alt=""></div>
+            <p class="gg-lb-hint">Scroll or pinch to zoom · drag to move · Esc to close</p>`;
+        document.body.appendChild(box);
+        img = box.querySelector(".gg-lb-img");
+        stage = box.querySelector(".gg-lb-stage");
+        level = box.querySelector(".gg-lb-level");
+        nameEl = box.querySelector(".gg-lb-name");
+        zoomIn = box.querySelector('[data-zoom="in"]');
+        zoomOut = box.querySelector('[data-zoom="out"]');
+
+        box.querySelector("[data-close]").addEventListener("click", close);
+        zoomIn.addEventListener("click", () => zoomBy(1.5));
+        zoomOut.addEventListener("click", () => zoomBy(1 / 1.5));
+        stage.addEventListener("click", (e) => { if (e.target === stage) close(); });
+        stage.addEventListener("dblclick", (e) => { e.preventDefault(); scale > 1 ? reset() : zoomBy(2.5); });
+        stage.addEventListener("wheel", (e) => { e.preventDefault(); zoomBy(e.deltaY < 0 ? 1.15 : 1 / 1.15); }, { passive: false });
+        document.addEventListener("keydown", (e) => {
+            if (!box.classList.contains("is-open")) return;
+            if (e.key === "Escape") close();
+            if (e.key === "+" || e.key === "=") zoomBy(1.5);
+            if (e.key === "-") zoomBy(1 / 1.5);
+        });
+        dragAndPinch();
+    }
+
+    function apply() {
+        const limit = Math.max(0, (scale - 1) * 260);
+        x = Math.max(-limit, Math.min(limit, x));
+        y = Math.max(-limit, Math.min(limit, y));
+        img.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+        level.textContent = `${Math.round(scale * 100)}%`;
+        stage.classList.toggle("is-zoomed", scale > 1);
+        zoomIn.disabled = scale >= MAX - 0.01;
+        zoomOut.disabled = scale <= MIN + 0.01;
+    }
+
+    function zoomBy(factor) {
+        scale = Math.min(MAX, Math.max(MIN, scale * factor));
+        if (scale === 1) { x = 0; y = 0; }
+        apply();
+    }
+
+    function reset() { scale = 1; x = 0; y = 0; apply(); }
+
+    // mouse/finger drag to move a zoomed photo, two fingers to pinch
+    function dragAndPinch() {
+        let dragging = false, startX = 0, startY = 0, ox = 0, oy = 0;
+        let pinchStart = 0, pinchScale = 1;
+        const dist = (t) => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+
+        stage.addEventListener("pointerdown", (e) => {
+            if (scale <= 1 || e.pointerType === "touch") return;
+            dragging = true; startX = e.clientX; startY = e.clientY; ox = x; oy = y;
+            stage.classList.add("is-panning");
+            stage.setPointerCapture(e.pointerId);
+        });
+        stage.addEventListener("pointermove", (e) => {
+            if (!dragging) return;
+            x = ox + (e.clientX - startX); y = oy + (e.clientY - startY); apply();
+        });
+        const endDrag = () => { dragging = false; stage.classList.remove("is-panning"); };
+        stage.addEventListener("pointerup", endDrag);
+        stage.addEventListener("pointercancel", endDrag);
+
+        stage.addEventListener("touchstart", (e) => {
+            if (e.touches.length === 2) { pinchStart = dist(e.touches); pinchScale = scale; }
+            else if (e.touches.length === 1 && scale > 1) {
+                dragging = true; startX = e.touches[0].clientX; startY = e.touches[0].clientY; ox = x; oy = y;
+            }
+        }, { passive: true });
+        stage.addEventListener("touchmove", (e) => {
+            if (e.touches.length === 2 && pinchStart) {
+                e.preventDefault();
+                scale = Math.min(MAX, Math.max(MIN, pinchScale * (dist(e.touches) / pinchStart)));
+                if (scale === 1) { x = 0; y = 0; }
+                apply();
+            } else if (dragging && e.touches.length === 1) {
+                e.preventDefault();
+                x = ox + (e.touches[0].clientX - startX);
+                y = oy + (e.touches[0].clientY - startY);
+                apply();
+            }
+        }, { passive: false });
+        stage.addEventListener("touchend", (e) => { if (e.touches.length === 0) { pinchStart = 0; endDrag(); } }, { passive: true });
+    }
+
+    function open(src, alt, name) {
+        if (!box) build();
+        // Sanity serves the card at 900px wide; ask it for a bigger file to zoom into
+        img.src = src.includes("w=900") ? src.replace("w=900", "w=1800") : src;
+        img.alt = alt || name || "Product photo";
+        nameEl.textContent = name || "";
+        reset();
+        box.classList.add("is-open");
+        document.documentElement.style.overflow = "hidden";
+        if (lenis) lenis.stop();
+        box.querySelector("[data-close]").focus({ preventScroll: true });
+    }
+
+    function close() {
+        box.classList.remove("is-open");
+        document.documentElement.style.overflow = "";
+        if (lenis) lenis.start();
+        if (lastFocus) lastFocus.focus({ preventScroll: true });
+    }
+
+    // every product card on the site (home grid + category pages)
+    document.addEventListener("click", (e) => {
+        const media = e.target.closest(".hg-media");
+        if (!media) return;
+        const card = media.closest(".hg-item");
+        const shown = media.querySelector(".hg-img-alt") && getComputedStyle(media.querySelector(".hg-img-alt")).opacity === "1"
+            ? media.querySelector(".hg-img-alt")
+            : media.querySelector("img");
+        if (!shown) return;
+        lastFocus = document.activeElement;
+        open(shown.currentSrc || shown.src, shown.alt, card ? (card.querySelector(".hg-name") || {}).textContent : "");
+    });
+})();

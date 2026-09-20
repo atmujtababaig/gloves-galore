@@ -29,13 +29,28 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&family=Big+Shoulders+Display:wght@700;900&display=swap" rel="stylesheet">
     <!-- Only the icons the site uses (full icon font is 1.1 MB). Add a name here if you use a new icon. -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&icon_names=add,arrow_forward,arrow_upward,call,check_circle,cloud_upload,east,location_on,mail&display=block" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&icon_names=add,arrow_forward,arrow_upward,call,check_circle,close,cloud_upload,east,location_on,mail,west,zoom_in,zoom_out&display=block" rel="stylesheet">
     <!-- CSS -->
     <style>/* lenis.css (inlined, was a separate request to unpkg.com) */html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}.lenis.lenis-stopped{overflow:clip}.lenis.lenis-smooth iframe{pointer-events:none}</style>
     <link rel="stylesheet" href="styles.css">
+    <script>document.documentElement.classList.add('preloader-active');</script>
 </head>
 
 <body>
+    <!-- Page Preloader -->
+    <div class="preloader" role="status" aria-label="Loading Gloves Galore">
+        <div class="preloader-grid" aria-hidden="true"></div>
+        <div class="preloader-content">
+            <div class="preloader-mark">
+                <img src="assets/logo.png" alt="" class="preloader-logo">
+            </div>
+            <div class="preloader-progress" aria-hidden="true">
+                <span class="preloader-progress-bar"></span>
+            </div>
+            <span class="preloader-label">Built for the ride</span>
+        </div>
+    </div>
+
     <!-- Navbar -->
     <nav class="navbar">
         <div class="navbar-container">

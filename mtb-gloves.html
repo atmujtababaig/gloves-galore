@@ -30,13 +30,28 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&family=Big+Shoulders+Display:wght@700;900&display=swap" rel="stylesheet">
     <!-- Only the icons the site uses (full icon font is 1.1 MB). Add a name here if you use a new icon. -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&icon_names=add,arrow_forward,arrow_upward,call,check_circle,cloud_upload,east,location_on,mail&display=block" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&icon_names=add,arrow_forward,arrow_upward,call,check_circle,close,cloud_upload,east,location_on,mail,west,zoom_in,zoom_out&display=block" rel="stylesheet">
     <!-- CSS -->
     <style>/* lenis.css (inlined, was a separate request to unpkg.com) */html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}.lenis.lenis-stopped{overflow:clip}.lenis.lenis-smooth iframe{pointer-events:none}</style>
     <link rel="stylesheet" href="styles.css">
+    <script>document.documentElement.classList.add('preloader-active');</script>
 </head>
 
 <body>
+    <!-- Page Preloader -->
+    <div class="preloader" role="status" aria-label="Loading Gloves Galore">
+        <div class="preloader-grid" aria-hidden="true"></div>
+        <div class="preloader-content">
+            <div class="preloader-mark">
+                <img src="assets/logo.png" alt="" class="preloader-logo">
+            </div>
+            <div class="preloader-progress" aria-hidden="true">
+                <span class="preloader-progress-bar"></span>
+            </div>
+            <span class="preloader-label">Built for the ride</span>
+        </div>
+    </div>
+
     <!-- Navbar -->
     <nav class="navbar">
         <div class="navbar-container">
@@ -119,23 +134,23 @@
             <ol class="cat-steps">
                 <li class="cat-step">
                     <span class="cat-step-num" aria-hidden="true">01</span>
-                    <h3>Tell us the idea</h3>
-                    <p>A tech pack, a sketch on paper, photos, or a glove you already own. Whatever you have is enough to start.</p>
+                    <h3>Send the idea</h3>
+                    <p>A tech pack, a sketch, or photos of the glove your riders are already wearing out. Tell us the trail, we work back from there.</p>
                 </li>
                 <li class="cat-step">
                     <span class="cat-step-num" aria-hidden="true">02</span>
                     <h3>We sample it</h3>
-                    <p>We build one pair the way you described it. Samples are free — you only pay the courier.</p>
+                    <p>One pair, built the way you described. Samples are free — you only pay the courier.</p>
                 </li>
                 <li class="cat-step">
                     <span class="cat-step-num" aria-hidden="true">03</span>
-                    <h3>You change what you want</h3>
-                    <p>Palm too thick, cuff too short, colour off? We adjust and re-sample until the glove is right.</p>
+                    <h3>Ride it, then tell us</h3>
+                    <p>Palm too thick on the bar, cuff catching the sleeve, grip print in the wrong place? We change it and re-sample.</p>
                 </li>
                 <li class="cat-step">
                     <span class="cat-step-num" aria-hidden="true">04</span>
                     <h3>Production and packaging</h3>
-                    <p>Approved sample goes into production, every pair is checked, then packed in your branded packaging and shipped.</p>
+                    <p>The approved pair becomes the standard. Every glove is checked against it, then packed in your branded packaging.</p>
                 </li>
             </ol>
         </div>
@@ -143,9 +158,9 @@
 
     <section class="cat-section">
         <div class="cat-shell cat-shell--narrow">
-            <h2 class="cat-h2">NO MINIMUM ORDER, <span class="outline-text">REALLY</span></h2>
+            <h2 class="cat-h2">TWENTY PAIRS OR TWO THOUSAND, <span class="outline-text">SAME ANSWER</span></h2>
             <div class="cat-lead">
-                <p>Most suppliers will not talk to you under a thousand pairs. We will. A single team, a gym, a shop testing its first own-brand glove — we take the small order and we take it seriously, because small orders turn into repeat orders. Tell us how many you actually need and we will quote that number.</p>
+                <p>A trail crew that wants matching gloves, a bike shop testing its first own-brand run, a brand ordering for a season — we quote all three. There is no minimum we hold you to, because the shop that orders fifty pairs this year is the one ordering five hundred the next.</p>
             </div>
         </div>
     </section>

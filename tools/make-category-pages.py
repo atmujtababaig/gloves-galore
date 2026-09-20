@@ -14,12 +14,22 @@ connect = (SITE / "connect.html").read_text(encoding="utf-8")
 nav = re.search(r"    <!-- Navbar -->.*?</nav>\n", connect, re.S).group(0)
 footer = re.search(r"    <!-- Contact Footer -->.*?</footer>\n", connect, re.S).group(0)
 head_assets = re.search(r"    <!-- Fonts -->.*?<link rel=\"stylesheet\" href=\"styles.css\">\n", connect, re.S).group(0)
+preloader = re.search(r"    <!-- Page Preloader -->.*?\n    </div>\n", connect, re.S).group(0)
+preloader_script = "    <script>document.documentElement.classList.add('preloader-active');</script>\n"
 
 # ── content ───────────────────────────────────────────────────────────────────
 # Every category page: hero, lead, build list, product grid, process, small-orders, FAQ, links.
 CATS = [
     dict(
         file="mtb-gloves.html",
+        process=[
+            ("Send the idea", "A tech pack, a sketch, or photos of the glove your riders are already wearing out. Tell us the trail, we work back from there."),
+            ("We sample it", "One pair, built the way you described. Samples are free — you only pay the courier."),
+            ("Ride it, then tell us", "Palm too thick on the bar, cuff catching the sleeve, grip print in the wrong place? We change it and re-sample."),
+            ("Production and packaging", "The approved pair becomes the standard. Every glove is checked against it, then packed in your branded packaging."),
+        ],
+        small_order_h2="TWENTY PAIRS OR TWO THOUSAND, <span class=\"outline-text\">SAME ANSWER</span>",
+        small_order="A trail crew that wants matching gloves, a bike shop testing its first own-brand run, a brand ordering for a season — we quote all three. There is no minimum we hold you to, because the shop that orders fifty pairs this year is the one ordering five hundred the next.",
         nav="MTB",
         name="MTB gloves",
         title_html="MTB<br><span class=\"outline-text\">GLOVES</span>",
@@ -51,6 +61,14 @@ CATS = [
     ),
     dict(
         file="bmx-gloves.html",
+        process=[
+            ("Send the idea", "Your artwork, a sketch, or a glove you already ride. Team kit colours are enough to start."),
+            ("We sample it", "We build one pair to your spec, free. The courier is the only thing you pay for."),
+            ("Session it, then tell us", "Ride the sample properly before you approve it. Whatever rips, rubs or slips, we fix on the next one."),
+            ("Production and packaging", "Approved sample becomes the benchmark, every pair is checked against it, then packed with your branding."),
+        ],
+        small_order_h2="TEAM RUNS ARE <span class=\"outline-text\">WELCOME</span>",
+        small_order="Most suppliers will not answer an email about twenty pairs. We will. Riders, crews and shops get the same sampling, the same checks and the same packaging as a brand ordering for a whole season — the only difference is the number on the invoice.",
         nav="BMX",
         name="BMX gloves",
         title_html="BMX<br><span class=\"outline-text\">GLOVES</span>",
@@ -82,6 +100,14 @@ CATS = [
     ),
     dict(
         file="mx-gloves.html",
+        process=[
+            ("Send the idea", "Kit artwork, a tech pack, or the glove your team rode last season and wants improved."),
+            ("We sample it", "A free sample with your graphics printed on it, so you see the colours on fabric and not on a screen."),
+            ("Ride a moto, then tell us", "Knuckle too stiff, cuff fighting the brace, print cracking? Tell us and we rebuild it."),
+            ("Production and packaging", "Every pair matched to the approved sample, checked, then packed in your boxes or polybags."),
+        ],
+        small_order_h2="ONE TEAM IS A <span class=\"outline-text\">REAL ORDER</span>",
+        small_order="Race teams, clubs and privateer riders order small and order often. We take those runs seriously, because the glove your riders wear at a national is the best advertising your brand will ever get. Tell us the number you actually need and we quote that number.",
         nav="MX",
         name="MX gloves",
         title_html="MOTOCROSS<br><span class=\"outline-text\">GLOVES</span>",
@@ -113,6 +139,14 @@ CATS = [
     ),
     dict(
         file="gym-gloves.html",
+        process=[
+            ("Send the idea", "Your logo and the kind of lifting your members do. That is enough for a first sample."),
+            ("We sample it", "A free pair in the padding and the size you asked for, so you can put it on a bar before deciding."),
+            ("Lift in it, then tell us", "Padding too soft, wrap too tight, glove hard to pull off between sets? We adjust and re-sample."),
+            ("Production and packaging", "Production matched to the approved sample, checked pair by pair, then packed retail-ready with your branding."),
+        ],
+        small_order_h2="ONE GYM IS <span class=\"outline-text\">ENOUGH</span>",
+        small_order="You do not need a warehouse to start selling your own gloves. A single gym's stock, a coach's first branded run, a supplement brand testing merch — all of it is a real order here. Start small, see how they sell, then come back for more.",
         nav="Gym",
         name="gym gloves",
         title_html="GYM &amp; LIFTING<br><span class=\"outline-text\">GLOVES</span>",
@@ -144,6 +178,14 @@ CATS = [
     ),
     dict(
         file="ski-gloves.html",
+        process=[
+            ("Send the idea", "The warmth level, the price you need to hit, and any glove you want it to feel like."),
+            ("We sample it", "A free sample built with the insulation and shell you chose, so you can judge the warmth for yourself."),
+            ("Wear it out, then tell us", "Cuff too short over the jacket, liner pulling out with your hand, palm too stiff in the cold? We fix it."),
+            ("Production and packaging", "Approved sample sets the standard, every pair checked, then packed in your branded packaging."),
+        ],
+        small_order_h2="SMALL SEASON RUNS, <span class=\"outline-text\">NO PROBLEM</span>",
+        small_order="Snow brands order once a year and cannot afford to be stuck with dead stock. We will run a small first season with you and scale it when the sell-through tells you to, instead of forcing a thousand pairs into your storeroom up front.",
         nav="Ski",
         name="ski gloves",
         title_html="SKI &amp; SNOW<br><span class=\"outline-text\">GLOVES</span>",
@@ -175,6 +217,7 @@ CATS = [
     ),
 ]
 
+# Default wording; each category overrides it below so no two pages read the same.
 PROCESS = [
     ("Tell us the idea", "A tech pack, a sketch on paper, photos, or a glove you already own. Whatever you have is enough to start."),
     ("We sample it", "We build one pair the way you described it. Samples are free — you only pay the courier."),
@@ -190,6 +233,10 @@ SMALL_ORDER = (
 
 def esc(s):
     return _html.escape(str(s), quote=False)
+
+
+def process_for(cat):
+    return cat.get("process", PROCESS)
 
 
 def hero(cat):
@@ -219,14 +266,15 @@ def specs_html(items):
     )
 
 
-def process_html():
+def process_html(steps=None):
+    steps = steps or PROCESS
     return "\n".join(
         f"""                <li class="cat-step">
                     <span class="cat-step-num" aria-hidden="true">{i + 1:02d}</span>
                     <h3>{esc(t)}</h3>
                     <p>{esc(d)}</p>
                 </li>"""
-        for i, (t, d) in enumerate(PROCESS)
+        for i, (t, d) in enumerate(steps)
     )
 
 
@@ -299,9 +347,10 @@ def shell(file, seo_title, description, jsonld, body):
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-{head_assets}</head>
+{head_assets}{preloader_script}</head>
 
 <body>
+{preloader}
 {nav}
     <main class="cat-page">
 {body}
@@ -355,16 +404,16 @@ def category_page(cat, offset):
         <div class="cat-shell">
             <h2 class="cat-h2">{cat['process_h2']}</h2>
             <ol class="cat-steps">
-{process_html()}
+{process_html(process_for(cat))}
             </ol>
         </div>
     </section>
 
     <section class="cat-section">
         <div class="cat-shell cat-shell--narrow">
-            <h2 class="cat-h2">{SMALL_ORDER[0]}</h2>
+            <h2 class="cat-h2">{cat.get("small_order_h2", SMALL_ORDER[0])}</h2>
             <div class="cat-lead">
-                <p>{esc(SMALL_ORDER[1])}</p>
+                <p>{esc(cat.get("small_order", SMALL_ORDER[1]))}</p>
             </div>
         </div>
     </section>

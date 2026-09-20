@@ -3586,3 +3586,134 @@ button {
 .footer-site-links a[aria-current="page"] {
     color: var(--color-neon);
 }
+
+/* ── Product image viewer (click a glove to zoom) ── */
+.gg-lb {
+    position: fixed;
+    inset: 0;
+    z-index: 99000;
+    display: flex;
+    flex-direction: column;
+    background: rgba(5, 5, 5, 0.95);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+}
+
+.gg-lb.is-open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.25s ease;
+}
+
+.gg-lb-stage {
+    flex: 1;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    touch-action: none;
+    cursor: zoom-in;
+}
+
+.gg-lb-stage.is-zoomed {
+    cursor: grab;
+}
+
+.gg-lb-stage.is-panning {
+    cursor: grabbing;
+}
+
+.gg-lb-img {
+    max-width: min(92vw, 1100px);
+    max-height: 76vh;
+    object-fit: contain;
+    transform-origin: center center;
+    transition: transform 0.18s ease-out;
+    will-change: transform;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.gg-lb-stage.is-panning .gg-lb-img {
+    transition: none;
+}
+
+.gg-lb-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem clamp(1rem, 4vw, 2rem);
+}
+
+.gg-lb-name {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #f4f4ed;
+}
+
+.gg-lb-tools {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.gg-lb-btn {
+    width: 2.75rem;
+    height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--color-neon);
+    border: 2px solid var(--color-neon);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.gg-lb-btn:hover:not(:disabled) {
+    background: var(--color-neon);
+    color: #000;
+}
+
+.gg-lb-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.gg-lb-level {
+    min-width: 3.5rem;
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1rem;
+    color: rgba(244, 244, 237, 0.7);
+}
+
+.gg-lb-hint {
+    padding: 0 clamp(1rem, 4vw, 2rem) 1.25rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(244, 244, 237, 0.45);
+    text-align: center;
+}
+
+/* the cards themselves: show that they can be opened */
+.hg-media img {
+    cursor: zoom-in;
+}
+
+@media (max-width: 640px) {
+    .gg-lb-name {
+        max-width: 55vw;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
