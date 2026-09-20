@@ -403,12 +403,12 @@ def category_page(cat, offset):
 
 ABOUT_LEAD = [
     "Gloves Galore makes custom gloves for other people's brands, teams and shops. We do not sell a range under our own name — your logo is the only one on the finished pair.",
-    "We are based in Sialkot, Pakistan, where sports gear has been made for over a century. Design, patterns, materials, sampling and quality control are ours; the stitching happens across the workshops this city is built on. One thing we do differently: we take the small orders too.",
+    "We are based in Sialkot, Pakistan, where sports gear has been made for over a century. We do the whole glove ourselves — design, patterns, cutting, stitching, printing, checking and packing — so when you ask for a change, it is us making it, not a middleman passing the message on. One thing we do differently from the big names here: we take the small orders too.",
 ]
 
 ABOUT_BLOCKS = [
     ("What we make", "Gloves for mountain biking, BMX, motocross, the gym and the snow, in full-finger and half-finger versions, for men, women and kids. If a glove can be cut and stitched, we can quote it."),
-    ("Who we work with", "Brands putting out a line, bike and gym shops starting their own label, race teams who need twenty matching pairs, and people who have an idea and nowhere to make it. All of them get the same process."),
+    ("Who we work with", "Brands putting out a line, bike and gym shops starting their own label, race teams who need twenty matching pairs, and people who have an idea and no way to make it. All of them get the same process."),
     ("How we price", "Materials plus work, with no minimum we hold you to. Tell us the quantity you actually need and the price you want to land on, and we will tell you honestly what is possible at that number."),
     ("Materials", "The usual palm, mesh and stretch materials we already work with. If your design needs a fabric, insulation or hardware we do not keep, we source it for you before sampling instead of pushing you toward what is easy for us."),
     ("Samples", "Samples are free. You pay the courier, we pay for the glove. Nothing goes into production until you have held the sample and said yes."),
