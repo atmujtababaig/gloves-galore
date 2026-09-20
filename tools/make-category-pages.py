@@ -26,12 +26,12 @@ CATS = [
         hero_img="assets/mtb.jpg",
         hero_alt="Mountain biker wearing custom Gloves Galore MTB gloves",
         seo_title="Custom MTB Gloves Manufacturer | Gloves Galore, Sialkot",
-        description="Private-label mountain bike gloves made in Sialkot, Pakistan. Your colours, your logo, single-layer palms, silicone grip and touchscreen fingers. Free samples, small orders welcome.",
-        subtitle="Mountain bike gloves built to your design, in your colours, with your brand on them.",
+        description="Private-label MTB and cycling gloves made in Sialkot, Pakistan. Your colours, your logo, single-layer palms, silicone grip and touchscreen fingers. Free samples, small orders welcome.",
+        subtitle="Mountain bike and cycling gloves built to your design, in your colours, with your brand on them.",
         lead_h2="MOUNTAIN BIKE GLOVES, MADE TO <span class=\"outline-text\">YOUR SPEC</span>",
         lead=[
-            "We are a glove factory in Sialkot, Pakistan, and MTB gloves are what we make most. Trail, enduro, downhill, cross-country: the riding style changes what goes into the glove, so we start from how your riders actually use it instead of from a fixed catalogue.",
-            "Send us a tech pack, a rough sketch, or even a glove you already like. We turn it into a sample, you wear it and tell us what to change, and only when you are happy do we move to production. Every pair leaves here with your brand on it, never ours.",
+            "MTB gloves are what we make most. Trail, enduro, downhill, cross-country: the riding style changes what goes into the glove, so we start from how your riders actually use it instead of from a fixed catalogue.",
+            "Send us a tech pack, a rough sketch, or even a glove you already like. We turn it into a sample, you wear it and tell us what to change, and only when you are happy do we move to production. Everything ships out of Sialkot with your brand on it, never ours.",
         ],
         specs_h2="WHAT WE CAN BUILD INTO YOUR <span class=\"outline-text\">MTB GLOVE</span>",
         specs=[
@@ -46,7 +46,7 @@ CATS = [
         faq=[
             ("Can you copy a glove we already sell?", "Yes. Send us a pair and we will take it apart, match the pattern and materials, and show you a sample before anything else happens. We can also fix whatever you did not like about it."),
             ("Do you print our logo and make the packaging?", "Yes. Logos go on with sublimation, screen print, silicone or embroidery, and we can supply hang tags, polybags and boxes with your branding."),
-            ("What about fabric we cannot find?", "We keep the common materials in house, and if your design needs something special we source it for you before sampling."),
+            ("What about fabric we cannot find?", "We already work with the usual palm, mesh and stretch materials. If your design needs something we do not keep, we source it for you before sampling."),
         ],
     ),
     dict(
@@ -62,7 +62,7 @@ CATS = [
         lead_h2="BMX GLOVES THAT SURVIVE <span class=\"outline-text\">THE SESSION</span>",
         lead=[
             "BMX is hard on gloves. Bars, pegs, concrete and the odd crash all land on the same two square inches of palm, so we build BMX gloves with the seams and the palm layout that take that abuse, not the ones that look best on a spec sheet.",
-            "We make these for brands, for shops putting out their own line, and for teams who just want twenty pairs in their kit colours. The process is the same either way: sample first, changes, then production.",
+            "We make these for brands, for shops putting out their own line, and for teams who just want twenty pairs in their kit colours. The process is the same either way, and it all runs out of Sialkot: sample first, changes, then production.",
         ],
         specs_h2="WHAT WE CAN BUILD INTO YOUR <span class=\"outline-text\">BMX GLOVE</span>",
         specs=[
@@ -93,7 +93,7 @@ CATS = [
         lead_h2="MOTOCROSS GLOVES FOR <span class=\"outline-text\">YOUR BRAND</span>",
         lead=[
             "MX gloves have to do two jobs at once: keep the rider's grip on a bike that fights back, and take a hit from roost, a branch or the ground. We build the protection into the pattern rather than gluing it on at the end, so the glove still closes around the grip.",
-            "Graphics matter as much as construction in motocross. Sublimation lets us print your full kit design across the back of the hand, so gloves, jersey and pants can finally match.",
+            "Graphics matter as much as construction in motocross. Sublimation lets us print your full kit design across the back of the hand, so gloves, jersey and pants finally match — printed and stitched here in Sialkot.",
         ],
         specs_h2="WHAT WE CAN BUILD INTO YOUR <span class=\"outline-text\">MX GLOVE</span>",
         specs=[
@@ -124,7 +124,7 @@ CATS = [
         lead_h2="LIFTING GLOVES FOR GYMS AND <span class=\"outline-text\">FITNESS BRANDS</span>",
         lead=[
             "Gym gloves live or die on the palm. Too thick and the bar feels far away, too thin and the calluses come back. We build the padding around what your members actually lift, and we can make the same design in a padded and an unpadded version.",
-            "This is the category where branding pays off fastest: gyms, coaches and supplement brands put their logo on a glove their members wear three times a week. We handle the glove, the print and the packaging.",
+            "This is the category where branding pays off fastest: gyms, coaches and supplement brands put their logo on a glove their members wear three times a week. We handle the glove, the print and the packaging, and ship it from Sialkot.",
         ],
         specs_h2="WHAT WE CAN BUILD INTO YOUR <span class=\"outline-text\">GYM GLOVE</span>",
         specs=[
@@ -155,7 +155,7 @@ CATS = [
         lead_h2="SKI AND SNOWBOARD GLOVES, <span class=\"outline-text\">YOUR WAY</span>",
         lead=[
             "A snow glove is really three gloves in one: the shell, the insulation and the lining. Change any of them and the glove becomes warmer, thinner or cheaper, so we start by asking what your customers ski in and where you want to sit on price.",
-            "We build both gloves and mitts, short-cuff and gauntlet, in the same design language so a line looks consistent on a shop wall.",
+            "We build both gloves and mitts, short-cuff and gauntlet, in the same design language so a line looks consistent on a shop wall. All of it is made to order in Sialkot, Pakistan.",
         ],
         specs_h2="WHAT WE CAN BUILD INTO YOUR <span class=\"outline-text\">SNOW GLOVE</span>",
         specs=[
@@ -184,7 +184,7 @@ PROCESS = [
 
 SMALL_ORDER = (
     "NO MINIMUM ORDER, <span class=\"outline-text\">REALLY</span>",
-    "Most factories in Sialkot will not talk to you under a thousand pairs. We will. A single team, a gym, a shop testing its first own-brand glove — we take the small order and we take it seriously, because small orders turn into repeat orders. Tell us how many you actually need and we will quote that number.",
+    "Most suppliers will not talk to you under a thousand pairs. We will. A single team, a gym, a shop testing its first own-brand glove — we take the small order and we take it seriously, because small orders turn into repeat orders. Tell us how many you actually need and we will quote that number.",
 )
 
 
@@ -388,7 +388,7 @@ def category_page(cat, offset):
             <div class="cat-cta">
                 <div>
                     <h3>Ready to see a sample?</h3>
-                    <p>Tell us what you ride, what you sell and how many you need. A real person in Sialkot replies.</p>
+                    <p>Tell us what you ride, what you sell and how many you need. A real person replies, not a form robot.</p>
                 </div>
                 <div class="cat-cta-actions">
                     <a class="btn-explore" href="connect.html">Start your order <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
@@ -402,15 +402,15 @@ def category_page(cat, offset):
 
 
 ABOUT_LEAD = [
-    "Gloves Galore is a glove manufacturer in Sialkot, Pakistan. We do not sell under our own name — we build gloves for other people's brands, teams and shops, and their logo is the only one on the finished pair.",
-    "Sialkot has made sports gear for over a century, and almost everything about a glove is decided here: the pattern, the palm material, the stitching, the print. We work the same way the city has always worked, with one difference — we take the small orders too.",
+    "Gloves Galore makes custom gloves for other people's brands, teams and shops. We do not sell a range under our own name — your logo is the only one on the finished pair.",
+    "We are based in Sialkot, Pakistan, where sports gear has been made for over a century. Design, patterns, materials, sampling and quality control are ours; the stitching happens across the workshops this city is built on. One thing we do differently: we take the small orders too.",
 ]
 
 ABOUT_BLOCKS = [
     ("What we make", "Gloves for mountain biking, BMX, motocross, the gym and the snow, in full-finger and half-finger versions, for men, women and kids. If a glove can be cut and stitched, we can quote it."),
-    ("Who we work with", "Brands putting out a line, bike and gym shops starting their own label, race teams who need twenty matching pairs, and people who have an idea and no factory. All of them get the same process."),
+    ("Who we work with", "Brands putting out a line, bike and gym shops starting their own label, race teams who need twenty matching pairs, and people who have an idea and nowhere to make it. All of them get the same process."),
     ("How we price", "Materials plus work, with no minimum we hold you to. Tell us the quantity you actually need and the price you want to land on, and we will tell you honestly what is possible at that number."),
-    ("Materials", "We keep the common palm, mesh and stretch materials in house. If your design needs a fabric, insulation or hardware we do not stock, we source it for you before sampling instead of pushing you toward what we already have."),
+    ("Materials", "The usual palm, mesh and stretch materials we already work with. If your design needs a fabric, insulation or hardware we do not keep, we source it for you before sampling instead of pushing you toward what is easy for us."),
     ("Samples", "Samples are free. You pay the courier, we pay for the glove. Nothing goes into production until you have held the sample and said yes."),
     ("Quality control", "Every pair is checked before it is packed — stitching, print, sizing and the small things that make a customer send a glove back."),
 ]
@@ -438,8 +438,8 @@ def about_page():
     body = f"""    <section class="cat-hero cat-hero--plain">
         <div class="cat-hero-content">
             <span class="connect-eyebrow">About us</span>
-            <h1 class="connect-title">A GLOVE FACTORY<br><span class="outline-text">IN SIALKOT</span></h1>
-            <p class="connect-subtitle">We build gloves for other people's brands — and we put their name on them, not ours.</p>
+            <h1 class="connect-title">WE MAKE GLOVES<br><span class="outline-text">FOR YOUR BRAND</span></h1>
+            <p class="connect-subtitle">Custom gloves out of Sialkot, Pakistan — built to your design and sold under your name, not ours.</p>
         </div>
     </section>
 
@@ -478,7 +478,7 @@ def about_page():
             <div class="cat-cta">
                 <div>
                     <h3>Talk to us</h3>
-                    <p>WhatsApp, email or the contact form — whichever is easiest. We answer from Sialkot, Pakistan.</p>
+                    <p>WhatsApp, email or the contact form — whichever is easiest.</p>
                 </div>
                 <div class="cat-cta-actions">
                     <a class="btn-explore" href="connect.html">Start your order <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
