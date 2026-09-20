@@ -68,6 +68,7 @@ if (typeof Lenis !== "undefined") {
 
 // Navbar Load Animation
 gsap.from(".navbar", {
+    clearProps: "transform",
     y: -100,
     opacity: 0,
     duration: 1,
@@ -550,5 +551,58 @@ if (footerToTop) {
         if (!shown) return;
         lastFocus = document.activeElement;
         open(shown.currentSrc || shown.src, shown.alt, card ? (card.querySelector(".hg-name") || {}).textContent : "");
+    });
+})();
+
+// ── Full-screen menu ──
+(function initSiteMenu() {
+    const toggle = document.getElementById("menuToggle");
+    const menu = document.getElementById("siteMenu");
+    if (!toggle || !menu) return;
+    const links = [...menu.querySelectorAll(".menu-link")];
+    const navbar = document.querySelector(".navbar");
+    let lastFocus = null;
+
+    // links come in one after the other
+    links.forEach((a, i) => a.style.setProperty("--d", `${0.08 + i * 0.045}s`));
+
+    // mark the page we are on
+    const here = location.pathname.replace(/index\.html$/, "").replace(/\/$/, "") || "/";
+    links.forEach((a) => {
+        const target = new URL(a.getAttribute("href"), location.href).pathname.replace(/index\.html$/, "").replace(/\/$/, "") || "/";
+        if (target === here) a.setAttribute("aria-current", "page");
+    });
+
+    function open() {
+        lastFocus = document.activeElement;
+        document.body.classList.add("menu-open");
+        menu.setAttribute("aria-hidden", "false");
+        toggle.setAttribute("aria-expanded", "true");
+        toggle.setAttribute("aria-label", "Close menu");
+        navbar.classList.add("scrolled");
+        if (lenis) lenis.stop();
+        document.documentElement.style.overflow = "hidden";
+    }
+
+    function close() {
+        document.body.classList.remove("menu-open");
+        menu.setAttribute("aria-hidden", "true");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Open menu");
+        if (window.scrollY < 50) navbar.classList.remove("scrolled");
+        if (lenis) lenis.start();
+        document.documentElement.style.overflow = "";
+        if (lastFocus) lastFocus.focus({preventScroll: true});
+    }
+
+    toggle.addEventListener("click", () => (document.body.classList.contains("menu-open") ? close() : open()));
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && document.body.classList.contains("menu-open")) close();
+    });
+    // keep tabbing inside the menu while it is open
+    document.addEventListener("focusin", (e) => {
+        if (document.body.classList.contains("menu-open") && !menu.contains(e.target) && e.target !== toggle) {
+            links[0].focus({preventScroll: true});
+        }
     });
 })();

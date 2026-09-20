@@ -11,7 +11,7 @@ EMAIL = "mujtababaig598@gmail.com"
 WA_LINK = "https://wa.me/923141632509"
 
 connect = (SITE / "connect.html").read_text(encoding="utf-8")
-nav = re.search(r"    <!-- Navbar -->.*?</nav>\n", connect, re.S).group(0)
+nav = re.search(r"    <!-- Navbar -->.*?    <!-- /Navbar -->\n", connect, re.S).group(0)
 footer = re.search(r"    <!-- Contact Footer -->.*?</footer>\n", connect, re.S).group(0)
 head_assets = re.search(r"    <!-- Fonts -->.*?<link rel=\"stylesheet\" href=\"styles.css\">\n", connect, re.S).group(0)
 preloader = re.search(r"    <!-- Page Preloader -->.*?\n    </div>\n", connect, re.S).group(0)
