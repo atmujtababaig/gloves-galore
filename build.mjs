@@ -150,6 +150,15 @@ files['index.html'] = files['index.html'].replace(
   `<div class="helmet-grid" id="work-grid" aria-live="polite">${win.GG_workCardsHTML(products, {reveal: false})}\n        </div>`,
 )
 
+// category pages carry an empty grid too: <div class="helmet-grid" data-products="4" data-offset="2">
+for (const page of PAGES) {
+  files[page] = files[page].replace(/<div class="helmet-grid" data-products="(\d+)" data-offset="(\d+)"><\/div>/g, (_, n, off) => {
+    const picked = Array.from({length: Math.min(Number(n), products.length)}, (_, i) => products[(Number(off) + i) % products.length])
+    return `<div class="helmet-grid">${win.GG_workCardsHTML(picked, {reveal: false})}
+            </div>`
+  })
+}
+
 // ---------- 4. SEO ----------
 const b = config.business
 const org = {

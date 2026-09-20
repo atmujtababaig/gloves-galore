@@ -30,6 +30,36 @@
       "priority": "0.8"
     },
     {
+      "file": "mtb-gloves.html",
+      "path": "/mtb-gloves.html",
+      "priority": "0.7"
+    },
+    {
+      "file": "bmx-gloves.html",
+      "path": "/bmx-gloves.html",
+      "priority": "0.7"
+    },
+    {
+      "file": "mx-gloves.html",
+      "path": "/mx-gloves.html",
+      "priority": "0.7"
+    },
+    {
+      "file": "gym-gloves.html",
+      "path": "/gym-gloves.html",
+      "priority": "0.7"
+    },
+    {
+      "file": "ski-gloves.html",
+      "path": "/ski-gloves.html",
+      "priority": "0.7"
+    },
+    {
+      "file": "about.html",
+      "path": "/about.html",
+      "priority": "0.6"
+    },
+    {
       "file": "shipping.html",
       "path": "/shipping.html",
       "priority": "0.4"
