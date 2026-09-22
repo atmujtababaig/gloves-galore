@@ -11,7 +11,7 @@
  * After editing this file: Deploy → Manage deployments → edit (pencil) → Version: New version.
  */
 
-const NOTIFY_EMAIL = '';                     // empty = the Google account that deployed this script
+const NOTIFY_EMAIL = 'connect@glovesgalore.net,mujtababaig598@gmail.com';  // both: the business inbox keeps the record, Gmail gets the phone alert
 const SHEET_NAME = 'Gloves Galore, website leads';
 const MAX_FILE_BYTES = 20 * 1024 * 1024;     // Gmail limit is 25 MB per email
 const MIN_FILL_MS = 2500;                     // real people take longer than this to fill a form
