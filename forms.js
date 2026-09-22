@@ -78,8 +78,16 @@
             method: "POST",
             body: JSON.stringify({ ...data, subject, _elapsed: Date.now() - pageOpenedAt }),
         });
-        const json = await res.json().catch(() => ({}));
-        if (!res.ok || !json.success) throw new Error(json.message || `HTTP ${res.status}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        // Apps Script answers a POST with a chain of redirects, and fetch follows the
+        // last hop as a GET. When that happens Google hands back doGet()'s payload
+        // ({ok:true}) instead of doPost()'s ({success:true}), even though the message
+        // was delivered. Treating that as a failure told people their message had not
+        // gone through while it sat in the inbox. So: a 2xx means the script ran, and
+        // only an explicit success:false is an error.
+        const json = await res.json().catch(() => null);
+        if (json && json.success === false) throw new Error(json.message || "send-failed");
     }
 
     function errorText(err) {
