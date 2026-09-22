@@ -31,7 +31,7 @@ IG_PATH = ("M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9
 
 SIDE = f'''<div class="site-menu-side">
                 <p class="site-menu-side-title">Talk to us</p>
-                <a class="site-menu-mail" href="mailto:mujtababaig598@gmail.com">mujtababaig598@gmail.com</a>
+                <a class="site-menu-mail" href="mailto:connect@glovesgalore.net">connect@glovesgalore.net</a>
                 <div class="site-menu-socials">
                     <a class="site-menu-social" href="https://wa.me/923141632509" target="_blank" rel="noopener noreferrer" aria-label="Chat with Gloves Galore on WhatsApp">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="{WA_PATH}"/></svg>

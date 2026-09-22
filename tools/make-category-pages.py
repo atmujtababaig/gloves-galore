@@ -7,7 +7,7 @@ import re
 from pathlib import Path
 
 SITE = Path(__file__).resolve().parent.parent
-EMAIL = "mujtababaig598@gmail.com"
+EMAIL = "connect@glovesgalore.net"
 WA_LINK = "https://wa.me/923141632509"
 
 connect = (SITE / "connect.html").read_text(encoding="utf-8")

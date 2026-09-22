@@ -151,7 +151,7 @@ ${paragraphs}
                     </div>
                     <div class="cat-cta-actions">
                         <a class="btn-explore" href="/connect/">Start your order <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
-                        <a class="btn-primary" href="mailto:mujtababaig598@gmail.com">Email us</a>
+                        <a class="btn-primary" href="mailto:connect@glovesgalore.net">Email us</a>
                     </div>
                 </div>
             </div>

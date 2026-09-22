@@ -7,7 +7,7 @@ from pathlib import Path
 
 SITE = Path(__file__).resolve().parent.parent  # the site folder
 UPDATED = "19 September 2026"
-EMAIL = "mujtababaig598@gmail.com"
+EMAIL = "connect@glovesgalore.net"
 WA_DISPLAY = "+92 314 1632509"
 WA_LINK = "https://wa.me/923141632509"
 
@@ -161,20 +161,20 @@ privacy_sections = [
         "Tech packs, sketches, artwork and logos you send us are confidential. We use them only to quote, sample and make <strong>your</strong> products. We don’t show them to other clients, reuse them or sell them.",
         "We only feature your finished gloves in our portfolio or on social media if you give us permission. If you need a signed non-disclosure agreement (NDA) before sharing a design, just ask.")),
     (5, "sharing", "Who else sees your information", P("We never sell or rent your information. We share only what is needed with:") + "\n" + UL(
-        "<strong>Google</strong>, because our website forms deliver messages to our Gmail inbox and record them in a Google Sheet in our Google account.",
+        "<strong>Our email and business software providers</strong>, who run the inbox and the records your inquiry arrives in.",
         "<strong>Courier and shipping companies</strong>, which need the delivery name, address and phone number to deliver samples and orders.",
         "<strong>Banks and payment providers</strong>, to receive your payments.",
         "<strong>Authorities</strong>, only when the law requires it.")),
     (6, "website-cookies", "This website and cookies", P(
         "This website does <strong>not</strong> use analytics, advertising or tracking cookies, and we don’t follow you around the internet.",
-        "Like every website, it is delivered by a few service providers who receive your IP address and basic browser information so they can send you the files and keep their systems secure: the site is hosted on <strong>GitHub Pages</strong>, product photos come from <strong>Sanity</strong>’s image service, and some scripts load from <strong>cdnjs (Cloudflare)</strong> and <strong>unpkg</strong>.",
+        "Like every website, it reaches you through a few technical providers: our web host, the service that stores our product photos, and the content delivery networks our scripts come from. They receive your IP address and basic browser information so they can send you the files and keep their systems secure.",
         "The map on our Let’s Connect page is embedded from <strong>Google Maps</strong>, and Google may set its own cookies when the map loads. Links to WhatsApp and Instagram take you to those apps, where their own privacy policies apply.")),
     (7, "how-long", "How long we keep it", UL(
         "<strong>Inquiries:</strong> as long as we need to answer you and follow up on a quote or sample. Ask us and we’ll delete them sooner.",
         "<strong>Orders:</strong> as long as we need them for accounting, tax and warranty purposes.",
         "<strong>Newsletter:</strong> until you unsubscribe.")),
     (8, "security", "Keeping it safe", P(
-        "Your messages and files are stored in our Google account, which only the Gloves Galore team can open. We take reasonable care to protect it, but no online system is perfectly secure, so please don’t send passwords or card details through our forms.")),
+        "Your messages and files sit in business accounts that only the Gloves Galore team can open. We take reasonable care to protect them, but no online system is perfectly secure, so please don’t send passwords or card details through our forms.")),
     (9, "your-rights", "Your rights", P(f"At any time you can ask us to:") + "\n" + UL(
         "tell you what information we have about you,",
         "correct anything that is wrong,",
@@ -182,7 +182,7 @@ privacy_sections = [
         "stop sending you the newsletter.") + "\n" + P(
         f"Just {CONTACT_LINE}. We’ll reply within 30 days, usually much sooner. If you are in the EU or UK, you can also complain to your local data protection authority.")),
     (10, "where", "Where your data is stored", P(
-        "We work from Pakistan. Google stores our email and spreadsheets on its servers, which can be in other countries. By contacting us, you understand that your information may be handled outside your own country.")),
+        "We work from Pakistan. The providers that hold our email and business records keep them on servers that can be in other countries. By contacting us, you understand that your information may be handled outside your own country.")),
     (11, "children", "Children", P(
         "Our services are for businesses, teams and adults. This website is not meant for children, and we don’t knowingly collect information from anyone under 16.")),
     (12, "changes", "Changes to this policy", P(
