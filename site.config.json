@@ -91,6 +91,7 @@
     },
     "keepOriginal": [
       "assets/logo.png",
+      "assets/logo-email.png",
       "assets/og-image.jpg"
     ]
   }
