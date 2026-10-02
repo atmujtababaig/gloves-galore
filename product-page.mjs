@@ -45,14 +45,15 @@ export function productPage({product, others, nav, footer, headAssets, preloader
 
   const jsonLd = JSON.stringify({
     '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: name + ' gloves',
+    // Made-to-order B2B: no public price or reviews, so Product markup is invalid (needs offers/review/aggregateRating).
+    '@type': 'Service',
+    name: name + ' custom gloves',
+    serviceType: 'Custom sports glove manufacturing',
     image: shots.map((s) => abs(s, siteUrl)),
     description,
-    category: 'Sports gloves',
     url: siteUrl + '/gloves/' + slug + '/',
-    brand: {'@type': 'Brand', name: 'Gloves Galore'},
-    manufacturer: {
+    areaServed: 'Worldwide',
+    provider: {
       '@type': 'Organization',
       name: 'Gloves Galore',
       url: siteUrl + '/',
