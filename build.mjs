@@ -14,6 +14,7 @@ import {fileURLToPath} from 'node:url'
 import {createHash} from 'node:crypto'
 import sharp from 'sharp'
 import {productPage} from './product-page.mjs'
+import {articlePage, blogIndexPage} from './article-page.mjs'
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url))
 const OUT = path.join(ROOT, 'dist')
@@ -179,11 +180,42 @@ for (const [i, product] of withSlugs.entries()) {
   const others = [1, 2, 3, 4].map((n) => withSlugs[(i + n) % withSlugs.length]).filter((o) => o.slug !== product.slug)
   const file = `gloves/${product.slug}.html`
   files[file] = productPage({
-    product, others, slug: product.slug, siteUrl: SITE_URL, copy: productCopy[product.slug],
+    product, others, slug: product.slug, siteUrl: SITE_URL, copy: productCopy[product.slug], meta: productCopy._meta?.[product.slug],
     nav: navBlock, footer: footerBlock, headAssets: headBlock, preloader: preloaderBlock,
   })
   PAGES.push(file)
   productPaths.push(`/gloves/${product.slug}/`)
+}
+
+// ---------- 3c. blog: /blog/ and /blog/<slug>/ from the Sanity "article" documents ----------
+const ARTICLES_QUERY = `*[_type == "article" && defined(slug.current) && !(_id in path("drafts.**"))] | order(publishedAt desc) {
+  title, "slug": slug.current, description, author, publishedAt, "updatedAt": _updatedAt, category,
+  "cover": cover.asset->url, "coverAlt": cover.alt,
+  body[]{..., _type == "image" => {"url": asset->url, alt}},
+  faq[]{q, a}
+}`
+let articles = []
+try {
+  const {projectId, dataset, apiVersion} = win.GG_SANITY
+  const res = await fetch(`https://${projectId}.apicdn.sanity.io/v${apiVersion}/data/query/${dataset}?query=${encodeURIComponent(ARTICLES_QUERY)}`)
+  if (!res.ok) throw new Error(`HTTP ${res.status}`)
+  articles = ((await res.json()).result || []).map((a) => ({...a, updatedAt: (a.updatedAt || '').slice(0, 10)}))
+} catch (err) {
+  warnings.push(`Sanity unreachable for articles (${err.message}); blog not built`)
+}
+const blogPaths = []
+const shellParts = {nav: navBlock, footer: footerBlock, headAssets: headBlock, preloader: preloaderBlock}
+for (const [i, article] of articles.entries()) {
+  const others = articles.filter((_, j) => j !== i).slice(0, 3)
+  const file = `blog/${article.slug}.html`
+  files[file] = articlePage({article, others, siteUrl: SITE_URL, ...shellParts})
+  PAGES.push(file)
+  blogPaths.push({path: `/blog/${article.slug}/`, lastmod: article.updatedAt || article.publishedAt})
+}
+if (articles.length) {
+  files['blog.html'] = blogIndexPage({articles, siteUrl: SITE_URL, ...shellParts})
+  PAGES.push('blog.html')
+  blogPaths.unshift({path: '/blog/', lastmod: articles[0].updatedAt || articles[0].publishedAt})
 }
 
 // ---------- 4. SEO ----------
@@ -263,6 +295,7 @@ await writeFile(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UT
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${config.pages.map((p) => `  <url><loc>${SITE_URL}${p.path === '/' ? '/' : '/' + p.file.replace(/\.html$/, '') + '/'}</loc><lastmod>${today}</lastmod><priority>${p.priority}</priority></url>`).join('\n')}
 ${productPaths.map((p) => `  <url><loc>${SITE_URL}${p}</loc><lastmod>${today}</lastmod><priority>0.6</priority></url>`).join('\n')}
+${blogPaths.map((p) => `  <url><loc>${SITE_URL}${p.path}</loc><lastmod>${p.lastmod}</lastmod><priority>0.6</priority></url>`).join('\n')}
 </urlset>
 `)
 await writeFile(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`)
@@ -280,6 +313,8 @@ await writeFile(path.join(OUT, '404.html'), `<!DOCTYPE html>
 <body><main><h1>Lost <span>grip?</span></h1><p>This page doesn't exist.</p><a href="${SITE_URL}/">Back to home</a></main></body></html>
 `)
 if (config.customDomain) await writeFile(path.join(OUT, 'CNAME'), `${config.customDomain}\n`)
+// IndexNow: Bing (and the AI answers built on it) checks this file before taking our URL pings
+if (config.indexNowKey) await writeFile(path.join(OUT, `${config.indexNowKey}.txt`), config.indexNowKey)
 
 // files that must sit at the site root (browsers and Google look for them there)
 for (const f of await readdir(path.join(ROOT, 'favicon'))) {
@@ -293,5 +328,6 @@ if (/1234567/.test(PAGES.map((p) => files[p]).join(''))) warnings.push('placehol
 
 console.log(`Built ${SITE_URL}`)
 console.log(`  ${products.length} products written into index.html, ${productPaths.length} glove pages built`)
+console.log(`  ${articles.length} blog articles built`)
 console.log(`  images: ${used.size} files, ${(before / 1048576).toFixed(1)} MB → ${(after / 1048576).toFixed(1)} MB`)
 for (const w of warnings) console.log(`  ⚠ ${w}`)

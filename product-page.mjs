@@ -17,12 +17,12 @@ const FALLBACK = [
   "There is no minimum order to clear first. A team's worth of gloves is a real order here, and so is a full season of stock. The first sample is on us and you only pay the courier.",
 ]
 
-export function productPage({product, others, nav, footer, headAssets, preloader, siteUrl, slug, copy}) {
+export function productPage({product, others, nav, footer, headAssets, preloader, siteUrl, slug, copy, meta}) {
   const name = product.name
   const title = name + ' Gloves | Custom Made by Gloves Galore'
   const first = (Array.isArray(copy) && copy[0]) || ''
-  const description = (first ? first.slice(0, 150).replace(/\s+\S*$/, '') + '. ' : '')
-    + 'Made to order in your colours with your branding, in Sialkot, Pakistan.'
+  // the Google snippet: a hand-written line from product-copy.json _meta, else the generic one
+  const description = meta || ('Custom ' + name + ' gloves, made to order in your colours with your branding in Sialkot, Pakistan. No minimum order and a free first sample.')
   const shots = [product.img, product.hoverImg].filter(Boolean)
 
   const gallery = shots.map((src, i) => `

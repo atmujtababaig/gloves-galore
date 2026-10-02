@@ -3381,6 +3381,11 @@ button {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
 }
 
+/* order facts under the no-minimum paragraph */
+.cat-specs--facts {
+    margin-top: 2.5rem;
+}
+
 .cat-spec {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -4254,4 +4259,192 @@ body.menu-open .site-menu-side { opacity: 1; }
 .contact-card .form-status[data-kind="error"],
 .newsletter .form-status[data-kind="error"] {
     color: #ff6b5b;
+}
+
+/* ============================================================
+   BLOG (/blog/ and /blog/<slug>/, built from Sanity articles)
+   ============================================================ */
+.article-hero {
+    padding: clamp(7rem, 12vw, 9.5rem) 1.5rem 0;
+}
+
+.article-title {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    font-size: clamp(2.4rem, 6.5vw, 4.4rem);
+}
+
+.article-meta {
+    margin-top: 1.25rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(244, 244, 237, 0.55);
+}
+
+.article-lead {
+    max-width: 44rem;
+    margin-top: 1.25rem;
+    font-size: clamp(1rem, 1.6vw, 1.125rem);
+    line-height: 1.75;
+    color: rgba(244, 244, 237, 0.78);
+}
+
+.article-cover {
+    max-width: 52rem;
+    margin: clamp(2rem, 4vw, 3rem) auto 0;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.75rem;
+    padding: clamp(1rem, 3vw, 2rem);
+}
+
+.article-cover img {
+    width: auto !important;
+    max-width: 100%;
+    max-height: min(55vh, 26rem);
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+.article-cover img,
+.article-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+}
+
+.article-body {
+    max-width: 44rem;
+    font-size: clamp(1rem, 1.6vw, 1.125rem);
+    line-height: 1.8;
+    color: rgba(244, 244, 237, 0.82);
+}
+
+.article-body p,
+.article-body ul,
+.article-body ol,
+.article-body blockquote,
+.article-body .article-figure {
+    margin-bottom: 1.4rem;
+}
+
+.article-body h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: #fff;
+    margin: 3rem 0 1.25rem;
+}
+
+.article-body h3 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(1.3rem, 2.6vw, 1.6rem);
+    color: #fff;
+    margin: 2.25rem 0 0.9rem;
+}
+
+.article-body > :first-child {
+    margin-top: 0;
+}
+
+.article-body ul,
+.article-body ol {
+    padding-left: 1.4rem;
+}
+
+.article-body ul { list-style: disc; }
+.article-body ol { list-style: decimal; }
+
+.article-body li {
+    margin-bottom: 0.5rem;
+}
+
+.article-body li::marker {
+    color: var(--color-neon);
+}
+
+.article-body a {
+    color: var(--color-neon);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.article-body strong {
+    color: #fff;
+}
+
+.article-body blockquote {
+    border-left: 3px solid var(--color-neon);
+    padding-left: 1.25rem;
+    color: #fff;
+}
+
+.article-figure figcaption {
+    margin-top: 0.6rem;
+    font-size: 0.8rem;
+    color: rgba(244, 244, 237, 0.5);
+}
+
+.blog-list {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.blog-card {
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    color: inherit;
+    text-decoration: none;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.blog-card:hover {
+    border-color: rgba(200, 255, 0, 0.5);
+    transform: translateY(-3px);
+}
+
+.blog-card img {
+    width: calc(100% + 3rem);
+    margin: -1.5rem -1.5rem 1.25rem;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.blog-card-date {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-neon);
+}
+
+.blog-card h3 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 1.45rem;
+    line-height: 1.05;
+    margin: 0.6rem 0 0.75rem;
+}
+
+.blog-card p {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: rgba(244, 244, 237, 0.7);
 }

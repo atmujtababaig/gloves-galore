@@ -3,6 +3,7 @@
 # Navbar, head assets and footer are copied from connect.html so the pages always match the site.
 # The product grid on each page is filled in by build.mjs from Sanity (data-products / data-offset).
 import html as _html
+import json
 import re
 from pathlib import Path
 
@@ -134,7 +135,6 @@ CATS = [
         faq=[
             ("Can you match our jersey artwork?", "Yes. Send the artwork files you use for the kit and we will lay them onto the glove pattern, then show you a print proof and a sample."),
             ("Do you do youth sizes?", "Yes. Sizes from youth up to XXL, and we can grade a pattern to whatever size chart you already use."),
-            ("How long does a sample take?", "Usually a few days once the design is locked, plus courier time. Samples are free, you only pay the shipping."),
         ],
     ),
     dict(
@@ -296,6 +296,36 @@ def links_html(current):
     return links
 
 
+# The plain facts a buyer asks before anything else. Same on every category page.
+ORDER_FACTS = [
+    ("Minimum order", "None. One team's worth of gloves is a real order here."),
+    ("Sample", "Free, made and shipped within 4 days. You pay only the courier and get the tracking number."),
+    ("Design fee", "None. We turn your sketch, tech pack or old glove into the pattern ourselves."),
+    ("Materials we use most", "Amara synthetic suede for palms, Lycra for stretch backs and Neoprene for cuffs and padding. Other fabrics are sourced on request."),
+    ("Branding", "Sublimation, screen print, silicone print or embroidery, plus your own hang tags, polybags and boxes."),
+    ("Production date", "Given with your quote, so you know when the stock is ready."),
+]
+
+COMMON_FAQ = [
+    ("What is your minimum order?", "There is no minimum. Tell us how many pairs you actually need, one team or a full season of stock, and we quote that number."),
+    ("How long does a sample take?", "The sample is made and shipped within 4 days once the design is agreed. It is free, you pay only the courier, and we send you the tracking number."),
+    ("How much do custom gloves cost?", "It depends on the glove: the palm material, the print method, the number of colours, any padding or protection, and how many pairs you order. Send us the design and the quantity and we quote that exact glove. There is no design fee."),
+]
+
+
+def faq_items(cat):
+    return cat["faq"] + COMMON_FAQ
+
+
+def faq_json_ld(cat):
+    """FAQPage markup: no rich result any more, but it tells Google and AI answers what each FAQ says."""
+    qa = ",".join(
+        '{"@type":"Question","name":' + json.dumps(q) + ',"acceptedAnswer":{"@type":"Answer","text":' + json.dumps(a) + '}}'
+        for q, a in faq_items(cat)
+    )
+    return '<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[' + qa + ']}</script>'
+
+
 def json_ld(cat):
     """Service + breadcrumb, so Google can tell these pages apart from the home page."""
     name = esc(cat["name"])
@@ -314,7 +344,8 @@ def json_ld(cat):
         '{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":['
         '{"@type":"ListItem","position":1,"name":"Home","item":"{{SITE_URL}}/"},'
         f'{{"@type":"ListItem","position":2,"name":"{esc(cat["nav"])} gloves","item":"{{{{SITE_URL}}}}/{cat["file"]}"}}'
-        "]}</script>"
+        "]}</script>" + chr(10) + "    "
+        + faq_json_ld(cat)
     )
 
 
@@ -415,6 +446,9 @@ def category_page(cat, offset):
             <div class="cat-lead">
                 <p>{esc(cat.get("small_order", SMALL_ORDER[1]))}</p>
             </div>
+            <ul class="cat-specs cat-specs--facts">
+{specs_html(ORDER_FACTS)}
+            </ul>
         </div>
     </section>
 
@@ -422,7 +456,7 @@ def category_page(cat, offset):
         <div class="cat-shell cat-shell--narrow">
             <h2 class="cat-h2">QUESTIONS WE GET <span class="outline-text">A LOT</span></h2>
             <div class="cat-faq">
-{faq_html(cat['faq'])}
+{faq_html(faq_items(cat))}
             </div>
         </div>
     </section>

@@ -1,5 +1,5 @@
 {
-  "_help": "Two paragraphs of copy for each glove page. The slug matches the product name in Sanity (Stealth Arrow -> stealth-arrow). A glove with no entry here falls back to the generic text in product-page.mjs.",
+  "_help": "Two paragraphs of copy for each glove page. The slug matches the product name in Sanity (Stealth Arrow -> stealth-arrow). A glove with no entry here falls back to the generic text in product-page.mjs. _meta holds the Google description for each glove page (under 155 characters, full sentences).",
   "stealth-arrow": [
     "Stealth Arrow is the plain black one, and that is the whole point of it. A matte black shell carries nothing but our white shield on the back of the hand and four rows of white chevrons running down the fingers, so the only colour on the glove is the colour a brand decides to put there.",
     "This is the build most of our customers start from, because a single shell like this can become a trail glove, a race glove or a team glove without changing the pattern. Tell us the colours you want in place of the white and we will sample it in your palette."
@@ -39,5 +39,17 @@
   "blaze-pixel": [
     "Blaze Pixel is the orange version of the same half finger build. The digital camo prints over a breathable mesh back, the black overlays and the rubberised shield badge stay where they are, and the cut stops just above the knuckle.",
     "Running one design in two colourways, like this one and Toxic Pixel, is the cheapest way to fill a shelf. We can do the same with your artwork in as many colourways as you want."
-  ]
+  ],
+  "_meta": {
+    "stealth-arrow": "Stealth Arrow is a matte black full finger riding glove, built to order with your logo and colours. No minimum order and a free first sample.",
+    "magma": "Magma is a full finger riding glove with a red and orange swirl print, made to order in your colours. No minimum order and a free first sample.",
+    "armor-pro": "Armor Pro is a protective riding glove with a moulded knuckle shell, made to order with your branding. No minimum order and a free first sample.",
+    "volt-arrow": "Volt Arrow is a fluorescent yellow full finger riding glove with black chevrons, made to order in your colours. No minimum order, free sample.",
+    "zebra-strike": "Zebra Strike is a black and white full finger riding glove, made to order with your logo and colours. No minimum order and a free first sample.",
+    "venom-line": "Venom Line is a full finger riding glove built from sweeping panels, made to order in your colours. No minimum order and a free first sample.",
+    "aqua-swirl": "Aqua Swirl is a navy riding glove with a turquoise swirl print, made to order with your branding. No minimum order and a free first sample.",
+    "red-arrow": "Red Arrow is a red to black fade riding glove with white chevrons, made to order in your colours. No minimum order and a free first sample.",
+    "toxic-pixel": "Toxic Pixel is a half finger glove with green digital camo on a mesh back, made to order with your logo. No minimum order, free first sample.",
+    "blaze-pixel": "Blaze Pixel is a half finger glove with orange digital camo on a mesh back, made to order with your logo. No minimum order, free first sample."
+  }
 }
