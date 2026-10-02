@@ -199,7 +199,11 @@ try {
   const {projectId, dataset, apiVersion} = win.GG_SANITY
   const res = await fetch(`https://${projectId}.apicdn.sanity.io/v${apiVersion}/data/query/${dataset}?query=${encodeURIComponent(ARTICLES_QUERY)}`)
   if (!res.ok) throw new Error(`HTTP ${res.status}`)
-  articles = ((await res.json()).result || []).map((a) => ({...a, updatedAt: (a.updatedAt || '').slice(0, 10)}))
+  // an article dated in the future waits: the 6-hourly rebuild publishes it on its day (Pakistan time)
+  const todayPK = new Date(Date.now() + 5 * 3600e3).toISOString().slice(0, 10)
+  articles = ((await res.json()).result || [])
+    .filter((a) => a.publishedAt && a.publishedAt <= todayPK)
+    .map((a) => ({...a, updatedAt: (a.updatedAt || '').slice(0, 10)}))
 } catch (err) {
   warnings.push(`Sanity unreachable for articles (${err.message}); blog not built`)
 }

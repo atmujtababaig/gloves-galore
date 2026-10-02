@@ -3481,7 +3481,26 @@ button {
 
 .cat-faq {
     display: grid;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* each question is a <details> dropdown: closed by default, answer opens under it */
+.cat-faq-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cat-faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: 1.5rem;
+    padding: 1.25rem 0;
+    cursor: pointer;
+    list-style: none;
+}
+
+.cat-faq-item summary::-webkit-details-marker {
+    display: none;
 }
 
 .cat-faq-item h3 {
@@ -3489,14 +3508,50 @@ button {
     font-weight: 900;
     text-transform: uppercase;
     font-size: 1.35rem;
-    margin-bottom: 0.5rem;
+    line-height: 1.1;
+    color: #fff;
+    transition: color 0.2s ease;
+}
+
+.cat-faq-item summary:hover h3,
+.cat-faq-item[open] h3 {
     color: var(--color-neon);
+}
+
+.cat-faq-icon {
+    position: relative;
+    flex: none;
+    width: 1.1rem;
+    height: 1.1rem;
+}
+
+.cat-faq-icon::before,
+.cat-faq-icon::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 2px;
+    margin-top: -1px;
+    background: var(--color-neon);
+    transition: transform 0.25s ease;
+}
+
+.cat-faq-icon::after {
+    transform: rotate(90deg);
+}
+
+.cat-faq-item[open] .cat-faq-icon::after {
+    transform: rotate(0deg);
 }
 
 .cat-faq-item p {
     font-size: 0.98rem;
     line-height: 1.7;
     color: rgba(244, 244, 237, 0.78);
+    padding-bottom: 1.4rem;
+    max-width: 46rem;
 }
 
 .cat-links {
@@ -4294,20 +4349,14 @@ body.menu-open .site-menu-side { opacity: 1; }
 }
 
 .article-cover {
-    max-width: 52rem;
+    max-width: 64rem;
     margin: clamp(2rem, 4vw, 3rem) auto 0;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 0.75rem;
-    padding: clamp(1rem, 3vw, 2rem);
 }
 
+/* covers are designed 16:9 images (made with D:/Claude/gloves-galore-studio/covers) */
 .article-cover img {
-    width: auto !important;
-    max-width: 100%;
-    max-height: min(55vh, 26rem);
-    margin: 0 auto;
-    object-fit: contain;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
 }
 
 .article-cover img,

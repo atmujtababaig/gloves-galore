@@ -280,10 +280,10 @@ def process_html(steps=None):
 
 def faq_html(items):
     return "\n".join(
-        f"""                <div class="cat-faq-item">
-                    <h3>{esc(q)}</h3>
+        f"""                <details class="cat-faq-item">
+                    <summary><h3>{esc(q)}</h3><span class="cat-faq-icon" aria-hidden="true"></span></summary>
                     <p>{esc(a)}</p>
-                </div>"""
+                </details>"""
         for q, a in items
     )
 
@@ -301,7 +301,7 @@ ORDER_FACTS = [
     ("Minimum order", "None. One team's worth of gloves is a real order here."),
     ("Sample", "Free, made and shipped within 4 days. You pay only the courier and get the tracking number."),
     ("Design fee", "None. We turn your sketch, tech pack or old glove into the pattern ourselves."),
-    ("Materials we use most", "Amara synthetic suede for palms, Lycra for stretch backs and Neoprene for cuffs and padding. Other fabrics are sourced on request."),
+    ("Materials we use most", "Amara synthetic suede for palms, Lycra for stretch backs and Neoprene for cuffs. Other fabrics are sourced on request."),
     ("Branding", "Sublimation, screen print, silicone print or embroidery, plus your own hang tags, polybags and boxes."),
     ("Production date", "Given with your quote, so you know when the stock is ready."),
 ]

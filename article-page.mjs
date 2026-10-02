@@ -185,10 +185,10 @@ export function articlePage({article, others, siteUrl, nav, footer, headAssets, 
             <div class="cat-shell cat-shell--narrow">
                 <h2 class="cat-h2">QUICK <span class="outline-text">ANSWERS</span></h2>
                 <div class="cat-faq">${faq.map((x) => `
-                    <div class="cat-faq-item">
-                        <h3>${esc(x.q)}</h3>
+                    <details class="cat-faq-item">
+                        <summary><h3>${esc(x.q)}</h3><span class="cat-faq-icon" aria-hidden="true"></span></summary>
                         <p>${esc(x.a)}</p>
-                    </div>`).join('')}
+                    </details>`).join('')}
                 </div>
             </div>
         </section>` : ''
