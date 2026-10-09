@@ -1701,47 +1701,112 @@ button {
     display: block;
 }
 
+/* The bento sits on a fine unit grid (--ux by --uy) so each tile keeps the
+   shape of its photo. Gutters are empty tracks, there is no `gap`. */
 .gallery--bento {
+    --gallery-nav: 4.5rem;
+    --u: min(96vw / 172, (100vh - var(--gallery-nav)) * 0.95 / 88);
+    --ux: var(--u);
+    --uy: var(--u);
     display: grid;
-    gap: 1vh;
-    grid-template-columns: repeat(3, 32.5vw);
-    grid-template-rows: repeat(4, 23vh);
-    justify-content: center;
-    align-content: center;
+    grid-template-columns: repeat(172, var(--ux));
+    grid-template-rows: repeat(88, var(--uy));
+    place-content: center;
+    padding-top: var(--gallery-nav);
 }
 
+/* End of the scroll: the 2nd item (BMX shot) fills the screen. */
 .gallery--final.gallery--bento {
-    grid-template-columns: repeat(3, 100vw);
-    grid-template-rows: repeat(4, 49.5vh);
-    gap: 1vh;
+    --ux: calc(100vw / 90);
+    --uy: calc(100vh / 60);
+    place-content: start;
+    padding-top: 0;
+    left: calc(-41 * var(--ux));
 }
 
 .gallery--bento .gallery__item:nth-child(1) {
-    grid-area: 1 / 1 / 3 / 2;
+    grid-area: 1 / 1 / 61 / 41;
 }
 
 .gallery--bento .gallery__item:nth-child(2) {
-    grid-area: 1 / 2 / 2 / 3;
+    grid-area: 1 / 42 / 61 / 132;
 }
 
 .gallery--bento .gallery__item:nth-child(3) {
-    grid-area: 2 / 2 / 4 / 3;
+    grid-area: 1 / 133 / 61 / 173;
 }
 
 .gallery--bento .gallery__item:nth-child(4) {
-    grid-area: 1 / 3 / 3 / 4;
+    grid-area: 62 / 1 / 89 / 27;
 }
 
 .gallery--bento .gallery__item:nth-child(5) {
-    grid-area: 3 / 1 / 5 / 2;
+    grid-area: 62 / 28 / 89 / 76;
 }
 
 .gallery--bento .gallery__item:nth-child(6) {
-    grid-area: 3 / 3 / 5 / 4;
+    grid-area: 62 / 77 / 89 / 125;
 }
 
 .gallery--bento .gallery__item:nth-child(7) {
-    grid-area: 4 / 2 / 5 / 3;
+    grid-area: 62 / 126 / 89 / 173;
+}
+
+/* Keep the gloved hand in frame when the BMX shot is cropped to the screen. */
+.gallery--bento .gallery__item:nth-child(2) img {
+    object-position: 50% 55%;
+}
+
+/* Portrait screens: two tall shots, the BMX shot full width, four small ones. */
+@media (max-aspect-ratio: 1/1) {
+    .gallery--bento {
+        --u: min(94vw / 120, (100vh - var(--gallery-nav)) * 0.95 / 246);
+        grid-template-columns: repeat(120, var(--ux));
+        grid-template-rows: repeat(246, var(--uy));
+    }
+
+    .gallery--final.gallery--bento {
+        --ux: calc(100vw / 120);
+        --uy: calc(100vh / 74);
+        left: 0;
+        top: calc(-86 * var(--uy));
+    }
+
+    .gallery--bento .gallery__item:nth-child(1) {
+        grid-area: 1 / 1 / 85 / 60;
+    }
+
+    .gallery--bento .gallery__item:nth-child(2) {
+        grid-area: 87 / 1 / 161 / 121;
+    }
+
+    .gallery--bento .gallery__item:nth-child(3) {
+        grid-area: 1 / 62 / 85 / 121;
+    }
+
+    .gallery--bento .gallery__item:nth-child(4) {
+        grid-area: 205 / 79 / 247 / 121;
+    }
+
+    .gallery--bento .gallery__item:nth-child(5) {
+        grid-area: 163 / 1 / 203 / 60;
+    }
+
+    .gallery--bento .gallery__item:nth-child(6) {
+        grid-area: 163 / 62 / 203 / 121;
+    }
+
+    .gallery--bento .gallery__item:nth-child(7) {
+        grid-area: 205 / 1 / 247 / 77;
+    }
+
+    .gallery--bento .gallery__item:nth-child(2) img {
+        object-position: 67% 50%;
+    }
+
+    .gallery--bento .gallery__item:nth-child(5) img {
+        object-position: 80% 50%;
+    }
 }
 
 .section.bento-content {
