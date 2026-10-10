@@ -235,8 +235,9 @@ const org = {
   email: b.email || undefined,
   telephone: b.phone || undefined,
   address: b.city || b.country
-    ? {'@type': 'PostalAddress', addressLocality: b.city || undefined, addressRegion: b.region || undefined, addressCountry: b.country || undefined}
+    ? {'@type': 'PostalAddress', streetAddress: b.street || undefined, postalCode: b.postalCode || undefined, addressLocality: b.city || undefined, addressRegion: b.region || undefined, addressCountry: b.country || undefined}
     : undefined,
+  hasMap: b.mapUrl || undefined,
   sameAs: b.socials?.length ? b.socials : undefined,
 }
 // WebSite = the name Google shows above the link in search results
