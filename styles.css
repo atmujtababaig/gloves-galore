@@ -2736,19 +2736,11 @@ button {
 }
 
 .connect-info-card {
-    padding: 1.75rem 2rem;
-    border-radius: 1.25rem;
-    background: #141414;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1.6rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
     display: flex;
     flex-direction: column;
     gap: 0.85rem;
-    transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
-}
-
-.connect-info-card:hover {
-    transform: translateY(-3px);
-    border-color: rgba(200, 255, 0, 0.35);
 }
 
 .connect-info-card--clickable {
@@ -2757,9 +2749,7 @@ button {
 }
 
 .connect-info-card--clickable:hover {
-    transform: translateY(-4px);
-    border-color: var(--color-neon);
-    background: #181818;
+    border-top-color: var(--color-neon);
 }
 
 .connect-info-card--clickable:hover .info-card-link {
@@ -2899,6 +2889,9 @@ button {
 }
 
 .guarantee-card {
+    padding: 1.6rem 1.75rem;
+    border-radius: 8px;
+    border-top: none;
     background: var(--color-neon);
     color: var(--color-bg-dark);
     border: none;
@@ -2951,25 +2944,21 @@ button {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .faq-item {
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 1rem;
-    background: #111111;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
     overflow: hidden;
-    transition: border-color 0.25s ease, background 0.25s ease;
 }
 
 .faq-item.active {
-    border-color: var(--color-neon);
-    background: #161616;
+    border-bottom-color: var(--color-neon);
 }
 
 .faq-question {
     width: 100%;
-    padding: 1.5rem 1.75rem;
+    padding: 1.4rem 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -2999,12 +2988,12 @@ button {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.35s ease, padding 0.35s ease;
-    padding: 0 1.75rem;
+    padding: 0;
 }
 
 .faq-item.active .faq-answer {
     max-height: 15rem;
-    padding: 0 1.75rem 1.5rem;
+    padding: 0 0 1.5rem;
 }
 
 .faq-answer p {
@@ -3441,9 +3430,7 @@ button {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: grid;
-    gap: 1.25rem;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 /* order facts under the no-minimum paragraph */
@@ -3452,16 +3439,12 @@ button {
 }
 
 .cat-spec {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 0.75rem;
-    padding: 1.5rem;
-    transition: border-color 0.25s ease, transform 0.25s ease;
-}
-
-.cat-spec:hover {
-    border-color: rgba(200, 255, 0, 0.5);
-    transform: translateY(-3px);
+    display: grid;
+    grid-template-columns: minmax(0, 20rem) minmax(0, 44rem);
+    column-gap: clamp(1.5rem, 5vw, 4rem);
+    align-items: baseline;
+    padding: 1.35rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .cat-spec h3 {
@@ -3469,14 +3452,14 @@ button {
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.01em;
+    line-height: 1.05;
     font-size: 1.5rem;
-    margin-bottom: 0.6rem;
 }
 
 .cat-spec p {
-    font-size: 0.95rem;
+    font-size: 0.98rem;
     line-height: 1.65;
-    color: rgba(244, 244, 237, 0.7);
+    color: rgba(244, 244, 237, 0.72);
 }
 
 .cat-note {
@@ -3650,10 +3633,8 @@ button {
     align-items: center;
     justify-content: space-between;
     gap: 1.5rem;
-    padding: clamp(1.5rem, 3vw, 2.5rem);
-    border: 1px solid rgba(200, 255, 0, 0.35);
-    border-radius: 0.9rem;
-    background: rgba(200, 255, 0, 0.05);
+    padding-top: clamp(1.5rem, 3vw, 2.25rem);
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .cat-cta h3 {
@@ -4606,5 +4587,12 @@ body.menu-open .site-menu-side { opacity: 1; }
 @media (max-width: 700px) {
     .ws-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .cat-spec {
+        grid-template-columns: 1fr;
+        row-gap: 0.45rem;
     }
 }

@@ -404,8 +404,8 @@ def shell(file, seo_title, description, jsonld, body):
 # Real photos from our own workshop (assets/workshop/). key -> (file, width, height, alt, caption)
 WORKSHOP = {
     "machines": ("assets/workshop/sewing-machines.webp", 1889, 832,
-                 "Two Juki sewing machines on white tables in the Gloves Galore workshop in Sialkot",
-                 "Our stitching tables in Sialkot. Every pair is sewn here, by us."),
+                 "Two Juki sewing machines on white tables in the Gloves Galore workshop",
+                 "Our stitching tables. Every pair is sewn here, by us."),
     "gloves": ("assets/workshop/finished-gloves.webp", 1882, 836,
                "Three finished pairs of Gloves Galore gloves in red, lime and black laid out on a sewing machine table",
                "Finished pairs from our own range, on the table they were stitched at."),
@@ -555,7 +555,7 @@ def about_page():
         <div class="cat-hero-content">
             <span class="connect-eyebrow">About us</span>
             <h1 class="connect-title">WE MAKE GLOVES<br><span class="outline-text">FOR YOUR BRAND</span></h1>
-            <p class="connect-subtitle">Custom gloves out of Sialkot, Pakistan, built to your design and sold under your name, not ours.</p>
+            <p class="connect-subtitle">Custom gloves built to your design and sold under your name, not ours.</p>
         </div>
     </section>
 
