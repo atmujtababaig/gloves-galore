@@ -401,6 +401,38 @@ def shell(file, seo_title, description, jsonld, body):
 """
 
 
+# Real photos from our own workshop (assets/workshop/). key -> (file, width, height, alt, caption)
+WORKSHOP = {
+    "machines": ("assets/workshop/sewing-machines.webp", 1889, 832,
+                 "Two Juki sewing machines on white tables in the Gloves Galore workshop in Sialkot",
+                 "Our stitching tables in Sialkot. Every pair is sewn here, by us."),
+    "gloves": ("assets/workshop/finished-gloves.webp", 1882, 836,
+               "Three finished pairs of Gloves Galore gloves in red, lime and black laid out on a sewing machine table",
+               "Finished pairs from our own range, on the table they were stitched at."),
+    "packing": ("assets/workshop/packing-table.webp", 1536, 665,
+                "Finished black winter gloves stacked on a packing table beside polybagged pairs and a carton",
+                "Finished pairs, checked and packed in our workshop."),
+}
+
+# Which workshop photo sits under the process steps on each category page.
+CAT_PHOTO = {
+    "mtb-gloves.html": "gloves",
+    "bmx-gloves.html": "gloves",
+    "mx-gloves.html": "machines",
+    "gym-gloves.html": "machines",
+    "ski-gloves.html": "packing",
+}
+
+
+def photo_html(key, wide=False):
+    src, w, h, alt, cap = WORKSHOP[key]
+    cls = "ws-photo ws-photo--wide" if wide else "ws-photo"
+    return f"""            <figure class="{cls}">
+                <img src="{src}" alt="{esc(alt)}" width="{w}" height="{h}" loading="lazy" decoding="async">
+                <figcaption>{esc(cap)}</figcaption>
+            </figure>"""
+
+
 def category_page(cat, offset):
     lead = "\n".join(f"                <p>{esc(p)}</p>" for p in cat["lead"])
     body = f"""{hero(cat)}
@@ -437,6 +469,7 @@ def category_page(cat, offset):
             <ol class="cat-steps">
 {process_html(process_for(cat))}
             </ol>
+{photo_html(CAT_PHOTO[cat['file']]) if cat['file'] in CAT_PHOTO else ''}
         </div>
     </section>
 
@@ -530,6 +563,17 @@ def about_page():
         <div class="cat-shell cat-shell--narrow">
             <div class="cat-lead">
 {lead}
+            </div>
+        </div>
+    </section>
+
+    <section class="cat-section">
+        <div class="cat-shell">
+            <h2 class="cat-h2">INSIDE OUR <span class="outline-text">WORKSHOP</span></h2>
+            <div class="ws-grid">
+{photo_html("machines", wide=True)}
+{photo_html("gloves")}
+{photo_html("packing")}
             </div>
         </div>
     </section>

@@ -4562,3 +4562,49 @@ body.menu-open .site-menu-side { opacity: 1; }
     line-height: 1.6;
     color: rgba(244, 244, 237, 0.7);
 }
+
+/* Workshop photos (about page, category pages, home strip) */
+.ws-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.ws-photo {
+    margin: 0;
+}
+
+.ws-photo--wide {
+    grid-column: 1 / -1;
+}
+
+.ws-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ws-photo figcaption {
+    margin-top: 0.7rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: rgba(244, 244, 237, 0.6);
+}
+
+.ws-photo figcaption a {
+    color: var(--color-neon);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.cat-steps + .ws-photo {
+    margin-top: 2.5rem;
+}
+
+@media (max-width: 700px) {
+    .ws-grid {
+        grid-template-columns: 1fr;
+    }
+}
