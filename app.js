@@ -142,8 +142,11 @@ gsap.from(".product-card", {
     const fill = section.querySelector(".carousel-progress-fill");
     const cards = () => Array.from(track.querySelectorAll(".product-card"));
 
-    // Lenis must not grab wheel/touch inside the track (horizontal trackpad swipes)
-    track.setAttribute("data-lenis-prevent-wheel", "");
+    // Lenis lets go of the wheel only for sideways swipes over the track. An up/down
+    // wheel keeps the page's smooth scroll, so the page no longer catches here.
+    track.addEventListener("wheel", (e) => {
+        track.toggleAttribute("data-lenis-prevent-wheel", Math.abs(e.deltaX) > Math.abs(e.deltaY));
+    }, { passive: true });
 
     const maxScroll = () => track.scrollWidth - track.clientWidth;
 
