@@ -1,7 +1,8 @@
 // node tools/check-links.mjs  — every href/src in dist/ must resolve to a real file
 import {readdir, readFile, stat} from 'node:fs/promises'
 import path from 'node:path'
-const OUT = path.join(path.dirname(new URL(import.meta.url).pathname.slice(1)), '..', 'dist')
+import {fileURLToPath} from 'node:url'
+const OUT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'dist')
 const pages = []
 const walk = async (dir) => {
   for (const e of await readdir(dir, {withFileTypes: true})) {

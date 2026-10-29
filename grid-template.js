@@ -11,6 +11,10 @@
 
     const frame = (mod) => `<svg class="hg-border hg-border--${mod}" viewBox="0 0 407 411" preserveAspectRatio="none" aria-hidden="true"><path class="n-desk" d="${NOTCH}"/><path class="n-wide" d="${NOTCH_WIDE}"/></svg>`;
 
+    // Sanity "category" value → the word used in alt text and labels ("ski " in "Glacier ski gloves")
+    const CATEGORY_WORDS = { mtb: "MTB", bmx: "BMX", mx: "MX", gym: "gym", ski: "ski" };
+    root.GG_categoryWord = (p) => (p && CATEGORY_WORDS[p.category] ? CATEGORY_WORDS[p.category] + " " : "");
+
     // "Stealth Arrow" → "stealth-arrow": the folder each glove's own page lives in
     root.GG_slug = (name) => String(name || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
@@ -22,10 +26,10 @@
         <article class="hg-item${reveal ? " hg-reveal" : ""}">
             ${frame("base")}
             ${frame("lime")}
-            <a class="hg-link" href="/gloves/${root.GG_slug(p.name)}/" aria-label="${esc(p.name)} gloves"></a>
+            <a class="hg-link" href="/gloves/${root.GG_slug(p.name)}/" aria-label="${esc(p.name)} ${root.GG_categoryWord(p)}gloves"></a>
             <button type="button" class="hg-zoom" aria-label="Open the ${esc(p.name)} photo" data-zoom-card><span class="material-symbols-outlined" aria-hidden="true">zoom_in</span></button>
             <div class="hg-media${p.hoverImg ? " has-alt" : ""}">
-                <img src="${esc(p.img)}" alt="${esc(p.name)} gloves by Gloves Galore" loading="lazy" decoding="async" width="900" height="900">
+                <img src="${esc(p.img)}" alt="${esc(p.name)} ${root.GG_categoryWord(p)}gloves by Gloves Galore" loading="lazy" decoding="async" width="900" height="900">
                 ${p.hoverImg ? `<img class="hg-img-alt" src="${esc(p.hoverImg)}" alt="" aria-hidden="true" loading="lazy" decoding="async" width="900" height="900">` : ""}
             </div>
             <a class="hg-label" href="/gloves/${root.GG_slug(p.name)}/"><span class="hg-name">${esc(p.name)}</span><span class="hg-year">${esc(p.year)}</span></a>
@@ -33,7 +37,7 @@
 
     root.GG_productsQueryURL = (cfg) => {
         const query = `*[_type == "product" && defined(image.asset)] | order(order asc, _createdAt asc){
-            name, year, "img": image.asset->url, "hoverImg": hoverImage.asset->url
+            name, year, category, "img": image.asset->url, "hoverImg": hoverImage.asset->url
         }`;
         return `https://${cfg.projectId}.apicdn.sanity.io/v${cfg.apiVersion}/data/query/${cfg.dataset}` +
             `?query=${encodeURIComponent(query)}`;

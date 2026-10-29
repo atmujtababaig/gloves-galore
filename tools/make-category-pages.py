@@ -1,7 +1,8 @@
 # Regenerate: python tools/make-category-pages.py   (edit the text below, then run it)
 # Generates one page per glove category + about.html for the Gloves Galore site.
 # Navbar, head assets and footer are copied from connect.html so the pages always match the site.
-# The product grid on each page is filled in by build.mjs from Sanity (data-products / data-offset).
+# The product grid on each page is filled in by build.mjs from Sanity (data-products / data-offset;
+# data-category shows that category's own gloves first, when Sanity has any).
 import html as _html
 import json
 import re
@@ -458,7 +459,7 @@ def category_page(cat, offset):
         <div class="cat-shell">
             <h2 class="cat-h2">FROM OUR OWN <span class="outline-text">RANGE</span></h2>
             <p class="cat-note">These are gloves we have already built. Any one of them can be rebuilt in your colours, your materials and your branding, or we can start from a blank sheet.</p>
-            <div class="helmet-grid" data-products="4" data-offset="{offset}"></div>
+            <div class="helmet-grid" data-products="4" data-offset="{offset}" data-category="{cat["file"].split("-")[0]}"></div>
             <a class="cat-more" href="index.html#work">See the full range <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
         </div>
     </section>

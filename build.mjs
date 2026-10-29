@@ -152,10 +152,15 @@ files['index.html'] = files['index.html'].replace(
   `<div class="helmet-grid" id="work-grid" aria-live="polite">${win.GG_workCardsHTML(products, {reveal: false})}\n        </div>`,
 )
 
-// category pages carry an empty grid too: <div class="helmet-grid" data-products="4" data-offset="2">
+// category pages carry an empty grid too: <div class="helmet-grid" data-products="4" data-offset="2" data-category="ski">
+// A category with its own gloves in Sanity shows all of them (up to 8); otherwise the page
+// shows n gloves from the uncategorised range, starting at the offset.
+const uncategorised = products.filter((p) => !p.category)
 for (const page of PAGES) {
-  files[page] = files[page].replace(/<div class="helmet-grid" data-products="(\d+)" data-offset="(\d+)"><\/div>/g, (_, n, off) => {
-    const picked = Array.from({length: Math.min(Number(n), products.length)}, (_, i) => products[(Number(off) + i) % products.length])
+  files[page] = files[page].replace(/<div class="helmet-grid" data-products="(\d+)" data-offset="(\d+)"(?: data-category="([a-z]+)")?><\/div>/g, (_, n, off, cat) => {
+    const own = cat ? products.filter((p) => p.category === cat).slice(0, 8) : []
+    const pool = uncategorised.length ? uncategorised : products
+    const picked = own.length ? own : Array.from({length: Math.min(Number(n), pool.length)}, (_, i) => pool[(Number(off) + i) % pool.length])
     return `<div class="helmet-grid">${win.GG_workCardsHTML(picked, {reveal: false})}
             </div>`
   })
@@ -177,7 +182,9 @@ const productCopy = JSON.parse(await read('product-copy.json'))
 const withSlugs = products.map((p) => ({...p, slug: win.GG_slug(p.name)})).filter((p) => p.slug && p.img)
 const productPaths = []
 for (const [i, product] of withSlugs.entries()) {
-  const others = [1, 2, 3, 4].map((n) => withSlugs[(i + n) % withSlugs.length]).filter((o) => o.slug !== product.slug)
+  // "more from our range": the next gloves in the grid, same category first (a ski glove shows ski gloves)
+  const next = withSlugs.slice(i + 1).concat(withSlugs.slice(0, i))
+  const others = [...next.filter((o) => o.category === product.category), ...next.filter((o) => o.category !== product.category)].slice(0, 4)
   const file = `gloves/${product.slug}.html`
   files[file] = productPage({
     product, others, slug: product.slug, siteUrl: SITE_URL, copy: productCopy[product.slug], meta: productCopy._meta?.[product.slug],

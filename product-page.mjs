@@ -10,6 +10,14 @@ const STEPS = [
   ['Production', 'Every pair is checked against your approved sample, then packed in your branded packaging.'],
 ]
 
+// Sanity "category" → how the glove is named on its page and which category page it belongs to
+const CATEGORIES = {
+  mtb: {word: 'MTB', inText: 'MTB', page: '/mtb-gloves/', label: 'MTB gloves', service: 'Custom MTB glove manufacturing'},
+  bmx: {word: 'BMX', inText: 'BMX', page: '/bmx-gloves/', label: 'BMX gloves', service: 'Custom BMX glove manufacturing'},
+  mx: {word: 'MX', inText: 'MX', page: '/mx-gloves/', label: 'MX gloves', service: 'Custom motocross glove manufacturing'},
+  gym: {word: 'Gym', inText: 'gym', page: '/gym-gloves/', label: 'Gym gloves', service: 'Custom gym glove manufacturing'},
+  ski: {word: 'Ski', inText: 'ski', page: '/ski-gloves/', label: 'Ski gloves', service: 'Custom ski glove manufacturing'},
+}
 const abs = (src, siteUrl) => (src.startsWith('http') ? src : siteUrl + '/' + src.replace(/^\//, ''))
 
 const FALLBACK = [
@@ -19,15 +27,18 @@ const FALLBACK = [
 
 export function productPage({product, others, nav, footer, headAssets, preloader, siteUrl, slug, copy, meta}) {
   const name = product.name
-  const title = name + ' Gloves | Custom Made by Gloves Galore'
+  const cat = CATEGORIES[product.category]
+  const fullName = cat ? name + ' ' + cat.word : name // "Glacier Ski", "Stealth Arrow"
+  const named = cat ? name + ' ' + cat.inText : name // "Glacier ski", used before "gloves" in running text
+  const title = fullName + ' Gloves | Custom Made by Gloves Galore'
   const first = (Array.isArray(copy) && copy[0]) || ''
   // the Google snippet: a hand-written line from product-copy.json _meta, else the generic one
-  const description = meta || ('Custom ' + name + ' gloves, made to order in your colours with your branding in Sialkot, Pakistan. No minimum order and a free first sample.')
+  const description = meta || ('Custom ' + named + ' gloves, made to order in your colours with your branding in Sialkot, Pakistan. No minimum order and a free first sample.')
   const shots = [product.img, product.hoverImg].filter(Boolean)
 
   const gallery = shots.map((src, i) => `
                     <div class="product-shot${i === 0 ? ' is-first' : ''}">
-                        <img src="${esc(src)}" alt="${esc(name)} gloves by Gloves Galore${i ? ', second angle' : ''}" width="900" height="900" ${i ? 'loading="lazy"' : 'fetchpriority="high"'} decoding="async">
+                        <img src="${esc(src)}" alt="${esc(named)} gloves by Gloves Galore${i ? (cat ? ', palm side' : ', second angle') : ''}" width="900" height="900" ${i ? 'loading="lazy"' : 'fetchpriority="high"'} decoding="async">
                     </div>`).join('')
 
   const steps = STEPS.map(([t, d], i) => `
@@ -48,7 +59,7 @@ export function productPage({product, others, nav, footer, headAssets, preloader
     // Made-to-order B2B: no public price or reviews, so Product markup is invalid (needs offers/review/aggregateRating).
     '@type': 'Service',
     name: name + ' custom gloves',
-    serviceType: 'Custom sports glove manufacturing',
+    serviceType: cat ? cat.service : 'Custom sports glove manufacturing',
     image: shots.map((s) => abs(s, siteUrl)),
     description,
     url: siteUrl + '/gloves/' + slug + '/',
@@ -69,8 +80,10 @@ export function productPage({product, others, nav, footer, headAssets, preloader
     '@type': 'BreadcrumbList',
     itemListElement: [
       {'@type': 'ListItem', position: 1, name: 'Home', item: siteUrl + '/'},
-      {'@type': 'ListItem', position: 2, name: 'Gloves', item: siteUrl + '/#work'},
-      {'@type': 'ListItem', position: 3, name: name + ' gloves', item: siteUrl + '/gloves/' + slug + '/'},
+      cat
+        ? {'@type': 'ListItem', position: 2, name: cat.label, item: siteUrl + cat.page}
+        : {'@type': 'ListItem', position: 2, name: 'Gloves', item: siteUrl + '/#work'},
+      {'@type': 'ListItem', position: 3, name: name + (cat ? ' ' + cat.label.toLowerCase() : ' gloves'), item: siteUrl + '/gloves/' + slug + '/'},
     ],
   })
 
@@ -113,9 +126,9 @@ ${nav}
                 <div class="product-gallery">${gallery}
                 </div>
                 <div class="product-intro">
-                    <p class="product-breadcrumb"><a href="/">Home</a> <span aria-hidden="true">/</span> <a href="/#work">Gloves</a></p>
+                    <p class="product-breadcrumb"><a href="/">Home</a> <span aria-hidden="true">/</span> ${cat ? `<a href="${cat.page}">${esc(cat.label)}</a>` : '<a href="/#work">Gloves</a>'}</p>
                     <h1 class="glove-title">${esc(name)}</h1>
-                    <p class="product-tag">Our own build${product.year ? ' · ' + esc(product.year) : ''}</p>
+                    <p class="product-tag">${cat ? 'Our own ' + esc(cat.inText) + ' glove' : 'Our own build'}${product.year ? ' · ' + esc(product.year) : ''}</p>
 ${paragraphs}
                     <div class="cat-hero-actions product-actions">
                         <a class="btn-explore" href="/connect/">Get this in your colours <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
