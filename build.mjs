@@ -26,7 +26,7 @@ const SITE_URL = (config.customDomain ? `https://${config.customDomain}` : confi
 const PAGES = config.pages.map((p) => p.file) // every HTML page of the site (see site.config.json)
 const TEXT_FILES = [
   ...PAGES, 'styles.css', 'app.js', 'forms.js',
-  'grid-template.js', 'products.js', 'sanity-config.js',
+  'grid-template.js', 'products.js', 'sanity-config.js', 'orders.js',
 ]
 
 // Runs one of the site's browser scripts and returns what it put on `window`
@@ -279,7 +279,7 @@ for (const page of PAGES) {
     html = html.split(`"${other}"`).join(`"${to}"`).split(`"${other}#`).join(`"${to}#`).split(`/${other}"`).join(`${to}"`)
   }
   html = html.split('"index.html"').join('"/"').split('"index.html#').join('"/#')
-  html = html.replace(/(["'(])(assets\/)/g, '$1/$2').replace(/(["'])((?:styles\.css|app\.js|forms\.js)(?:\?v=[a-f0-9]+)?)\1/g, '$1/$2$1')
+  html = html.replace(/(["'(])(assets\/)/g, '$1/$2').replace(/(["'])((?:styles\.css|app\.js|forms\.js|orders\.js)(?:\?v=[a-f0-9]+)?)\1/g, '$1/$2$1')
   files[page] = html
 }
 
@@ -305,7 +305,7 @@ for (const [f, text] of Object.entries(files)) {
 const today = new Date().toISOString().slice(0, 10)
 await writeFile(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${config.pages.map((p) => `  <url><loc>${SITE_URL}${p.path === '/' ? '/' : '/' + p.file.replace(/\.html$/, '') + '/'}</loc><lastmod>${today}</lastmod><priority>${p.priority}</priority></url>`).join('\n')}
+${config.pages.filter((p) => p.sitemap !== false).map((p) => `  <url><loc>${SITE_URL}${p.path === '/' ? '/' : '/' + p.file.replace(/\.html$/, '') + '/'}</loc><lastmod>${today}</lastmod><priority>${p.priority}</priority></url>`).join('\n')}
 ${productPaths.map((p) => `  <url><loc>${SITE_URL}${p}</loc><lastmod>${today}</lastmod><priority>0.6</priority></url>`).join('\n')}
 ${blogPaths.map((p) => `  <url><loc>${SITE_URL}${p.path}</loc><lastmod>${p.lastmod}</lastmod><priority>0.6</priority></url>`).join('\n')}
 </urlset>

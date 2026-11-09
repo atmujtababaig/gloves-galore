@@ -77,6 +77,12 @@
       "file": "privacy.html",
       "path": "/privacy.html",
       "priority": "0.4"
+    },
+    {
+      "file": "order.html",
+      "path": "/order.html",
+      "priority": "0.1",
+      "sitemap": false
     }
   ],
   "images": {

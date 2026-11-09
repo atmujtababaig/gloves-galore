@@ -543,14 +543,14 @@ if (footerToTop) {
         if (lastFocus) lastFocus.focus({ preventScroll: true });
     }
 
-    // every product card on the site (home grid + category pages)
+    // every product card on the site (home grid + category pages) and the team order page photo
     document.addEventListener("click", (e) => {
         const zoomBtn = e.target.closest("[data-zoom-card]");
-        const media = zoomBtn ? zoomBtn.closest(".hg-item").querySelector(".hg-media") : e.target.closest(".product-shot");
+        const media = zoomBtn ? zoomBtn.closest(".hg-item").querySelector(".hg-media") : e.target.closest(".product-shot, .order-main-shot");
         if (!media) return;
         if (zoomBtn) e.preventDefault();
         const card = media.closest(".hg-item");
-        const pageTitle = document.querySelector(".glove-title");
+        const pageTitle = document.querySelector(".glove-title, .order-name");
         const shown = media.querySelector(".hg-img-alt") && getComputedStyle(media.querySelector(".hg-img-alt")).opacity === "1"
             ? media.querySelector(".hg-img-alt")
             : media.querySelector("img");

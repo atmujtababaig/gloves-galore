@@ -6,7 +6,7 @@ import html as _html
 from pathlib import Path
 
 SITE = Path(__file__).resolve().parent.parent  # the site folder
-UPDATED = "19 September 2026"
+UPDATED = "5 November 2026"
 EMAIL = "connect@glovesgalore.net"
 WA_DISPLAY = "+92 314 1632509"
 WA_LINK = "https://wa.me/923141632509"
@@ -224,6 +224,12 @@ terms_sections = [
     (5, "orders-payment", "Orders and payment", P(
         "An order is confirmed when you accept our quote or proforma invoice in writing and make any advance payment it asks for. Production starts after that.",
         "Prices, currency, advance payment, balance payment and accepted payment methods are written on your proforma invoice. Unless it says otherwise, the full balance is paid before your goods are shipped.")),
+    (6, "team-orders", "Team orders", UL(
+        "Teams that approve a design get their own order link, where they enter the number of pairs in each size. The price per pair is the one we agreed with you, and it depends on the total number of pairs in the order.",
+        "Team orders are paid by bank transfer, Wise or PayPal, whichever you choose on the order page. We email you the invoice with the payment details.",
+        "<strong>Orders of $300 or more:</strong> 50% of the order total is paid to start production. When your gloves are finished, we send you photos and a video, and the remaining 50% is paid before we ship.",
+        "<strong>Orders under $300</strong> are paid in full before production starts.",
+        "Gloves are made in the sizes you enter on the order page. Please measure each rider’s hand with our size guide first, because sizes can’t be exchanged once production starts.")),
     (6, "timelines", "Production and delivery times", P(
         "Production times in our quotes are estimates that start once your sample is approved and your order is confirmed. We keep you updated during production and can send photos or videos on request.",
         "If something outside our control slows things down, such as material supply, public holidays, customs or courier delays, we tell you straight away with a new estimate. How we ship is explained in our <a href=\"shipping.html\">Shipping &amp; Samples</a> policy.")),
