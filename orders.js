@@ -58,6 +58,7 @@ window.GG_ORDERS = {
         customer: {
             name: "Richard Lamb",
             email: "rdlamb2@comcast.net",
+            phone: "+1 (832) 423-4478",
             ship_to: "15 Cornerbrook Place, The Woodlands, TX 77381",
         },
     },
