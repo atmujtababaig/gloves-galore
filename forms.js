@@ -101,12 +101,14 @@
     }
 
     // Wires a form: validation, busy state, send, then onSuccess
-    function wire(form, { subject, button, busyLabel = "Sending…", onSuccess }) {
+    function wire(form, { subject, button, busyLabel = "Sending…", onSuccess, check }) {
         if (!form) return;
         addHoneypot(form);
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
             if (!form.reportValidity()) return;
+            // extra checks on fields that sit outside the form (e.g. the order page size steppers)
+            if (check && !check(form)) return;
 
             const btn = button || form.querySelector('[type="submit"]');
             const original = btn ? btn.innerHTML : "";
@@ -164,6 +166,13 @@
 
     // Team order page: sizes + totals are filled into hidden fields by order.html
     wire(document.getElementById("orderForm"), {
+        // the size steppers are outside the form, so reportValidity() never sees them
+        check: (f) => {
+            if (Number(f.elements.quantity.value) > 0) return true;
+            const first = document.querySelector("#orderSizes .order-sizes:not([hidden]) input");
+            if (first) { first.scrollIntoView({ behavior: "smooth", block: "center" }); first.reportValidity(); }
+            return false;
+        },
         subject: (f) => `New team order ${f.elements.order_no.value}: ${f.elements.company.value}, ${f.elements.quantity.value} pairs, ${f.elements.payment_method.value}`,
         onSuccess: (f) => {
             f.hidden = true;
