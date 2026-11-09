@@ -40,6 +40,7 @@ window.GG_ORDERS = {
     },
     "green-dragons": {
         team: "Green Dragons",
+        logo: "assets/orders/green-dragons/logo.png",
         designs: [
             // Venom option 1 was dropped by the team
             { name: "Volt Lime", images: [{ src: "assets/orders/green-dragons/volt-1.jpg", label: "Volt Lime, back of hand" }] },
