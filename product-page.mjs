@@ -22,7 +22,7 @@ const abs = (src, siteUrl) => (src.startsWith('http') ? src : siteUrl + '/' + sr
 
 const FALLBACK = [
   'This is a glove we build ourselves, and it is here to be changed. Colour, palm material, print, cuff and sizing are all open, and your logo is the only one that goes on the finished pair.',
-  "There is no minimum order to clear first. A team's worth of gloves is a real order here, and so is a full season of stock. The first sample is on us and you only pay the courier.",
+  "Small orders are welcome here. A team's worth of gloves is a real order here, and so is a full season of stock. The first sample is on us and you only pay the courier.",
 ]
 
 export function productPage({product, others, nav, footer, headAssets, preloader, siteUrl, slug, copy, meta}) {
@@ -33,7 +33,7 @@ export function productPage({product, others, nav, footer, headAssets, preloader
   const title = fullName + ' Gloves | Custom Made by Gloves Galore'
   const first = (Array.isArray(copy) && copy[0]) || ''
   // the Google snippet: a hand-written line from product-copy.json _meta, else the generic one
-  const description = meta || ('Custom ' + named + ' gloves, made to order in your colours with your branding in Sialkot, Pakistan. No minimum order and a free first sample.')
+  const description = meta || ('Custom ' + named + ' gloves, made to order in your colours with your branding in Sialkot, Pakistan. Small orders welcome and a free first sample.')
   const shots = [product.img, product.hoverImg].filter(Boolean)
 
   const gallery = shots.map((src, i) => `

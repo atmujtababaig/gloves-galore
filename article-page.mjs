@@ -223,7 +223,7 @@ ${moreHTML}
                     ${cat ? `<a class="cat-link" href="${cat[1]}">${cat[0]}</a>` : ''}
                     <a class="cat-link" href="/blog/">All articles</a>
                     <a class="cat-link" href="/about/">About us</a>
-                </div>${ctaBlock('Want to see your glove as a sample?', 'Send us the idea and the quantity. No minimum order, no design fee, and the first sample is on us.')}
+                </div>${ctaBlock('Want to see your glove as a sample?', 'Send us the idea and the quantity. Small orders welcome, no design fee, and the first sample is on us.')}
             </div>
         </section>`
 

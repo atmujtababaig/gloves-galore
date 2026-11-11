@@ -31,7 +31,7 @@ CATS = [
             ("Production and packaging", "The approved pair becomes the standard. Every glove is checked against it, then packed in your branded packaging."),
         ],
         small_order_h2="TWENTY PAIRS OR TWO THOUSAND, <span class=\"outline-text\">SAME ANSWER</span>",
-        small_order="A trail crew that wants matching gloves, a bike shop testing its first own-brand run, a brand ordering for a season: we quote all three. There is no minimum we hold you to, because the shop that orders fifty pairs this year is the one ordering five hundred the next.",
+        small_order="A trail crew that wants matching gloves, a bike shop testing its first own-brand run, a brand ordering for a season: we quote all three. Small orders matter to us, because the shop that orders fifty pairs this year is the one ordering five hundred the next.",
         nav="MTB",
         name="MTB gloves",
         title_html="MTB<br><span class=\"outline-text\">GLOVES</span>",
@@ -172,7 +172,7 @@ CATS = [
         ],
         process_h2="FROM IDEA TO <span class=\"outline-text\">BOXED STOCK</span>",
         faq=[
-            ("We are one gym, we do not need thousands of pairs.", "That is fine. We take small orders, including a single gym's stock. There is no minimum we hold you to."),
+            ("We are one gym, we do not need thousands of pairs.", "That is fine. We take small orders, including a single gym's stock."),
             ("Can you make them for women's sizes too?", "Yes. We grade patterns from XS upward rather than shrinking a men's glove, which is what usually makes small sizes fit badly."),
             ("Do you supply retail packaging?", "Yes: hang tags, polybags, boxes and barcode labels with your artwork, ready for a shelf."),
         ],
@@ -227,7 +227,7 @@ PROCESS = [
 ]
 
 SMALL_ORDER = (
-    "NO MINIMUM ORDER, <span class=\"outline-text\">REALLY</span>",
+    "SMALL ORDERS, <span class=\"outline-text\">WELCOME</span>",
     "Most suppliers will not talk to you under a thousand pairs. We will. A single team, a gym, a shop testing its first own-brand glove. We take the small order and we take it seriously, because small orders turn into repeat orders. Tell us how many you actually need and we will quote that number.",
 )
 
@@ -299,7 +299,7 @@ def links_html(current):
 
 # The plain facts a buyer asks before anything else. Same on every category page.
 ORDER_FACTS = [
-    ("Minimum order", "None. One team's worth of gloves is a real order here."),
+    ("Order size", "Small orders welcome. One team's worth of gloves is a real order here."),
     ("Sample", "Free, made and shipped within 4 days. You pay only the courier and get the tracking number."),
     ("Design fee", "None. We turn your sketch, tech pack or old glove into the pattern ourselves."),
     ("Materials we use most", "Amara synthetic suede for palms, Lycra for stretch backs and Neoprene for cuffs. Other fabrics are sourced on request."),
@@ -308,7 +308,7 @@ ORDER_FACTS = [
 ]
 
 COMMON_FAQ = [
-    ("What is your minimum order?", "There is no minimum. Tell us how many pairs you actually need, one team or a full season of stock, and we quote that number."),
+    ("Do you take small orders?", "Yes. Tell us how many pairs you actually need, one team or a full season of stock, and we quote that number."),
     ("How long does a sample take?", "The sample is made and shipped within 4 days once the design is agreed. It is free, you pay only the courier, and we send you the tracking number."),
     ("How much do custom gloves cost?", "It depends on the glove: the palm material, the print method, the number of colours, any padding or protection, and how many pairs you order. Send us the design and the quantity and we quote that exact glove. There is no design fee."),
 ]
@@ -526,7 +526,7 @@ ABOUT_LEAD = [
 ABOUT_BLOCKS = [
     ("What we make", "Gloves for mountain biking, BMX, motocross, the gym and the snow, in full-finger and half-finger versions, for men, women and kids. If a glove can be cut and stitched, we can quote it."),
     ("Who we work with", "Brands putting out a line, bike and gym shops starting their own label, race teams who need twenty matching pairs, and people who have an idea and no way to make it. All of them get the same process."),
-    ("How we price", "Materials plus work, with no minimum we hold you to. Tell us the quantity you actually need and the price you want to land on, and we will tell you honestly what is possible at that number."),
+    ("How we price", "Materials plus work. Tell us the quantity you actually need and the price you want to land on, and we will tell you honestly what is possible at that number."),
     ("Materials", "The usual palm, mesh and stretch materials we already work with. If your design needs a fabric, insulation or hardware we do not keep, we source it for you before sampling instead of pushing you toward what is easy for us."),
     ("Samples", "Samples are free. You pay the courier, we pay for the glove. Nothing goes into production until you have held the sample and said yes."),
     ("Quality control", "Every pair is checked before it is packed: stitching, print, sizing and the small things that make a customer send a glove back."),
@@ -619,7 +619,7 @@ def about_page():
     return shell(
         "about.html",
         "About Gloves Galore | Custom Glove Manufacturer in Sialkot",
-        "Gloves Galore is a private-label glove manufacturer in Sialkot, Pakistan. We build MTB, BMX, motocross, gym and ski gloves for other brands, teams and shops, free samples, no minimum order.",
+        "Gloves Galore is a private-label glove manufacturer in Sialkot, Pakistan. We build MTB, BMX, motocross, gym and ski gloves for other brands, teams and shops, with free samples and small orders welcome.",
         jsonld,
         body,
     )
