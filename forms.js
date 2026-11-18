@@ -173,7 +173,7 @@
             if (first) { first.scrollIntoView({ behavior: "smooth", block: "center" }); first.reportValidity(); }
             return false;
         },
-        subject: (f) => `New team order ${f.elements.order_no.value}: ${f.elements.company.value}, ${f.elements.quantity.value} pairs, ${f.elements.payment_method.value}`,
+        subject: (f) => `New team order ${f.elements.order_no.value}: ${f.elements.company.value}, ${f.elements.quantity.value} pairs, ${f.elements.payment_method ? f.elements.payment_method.value : "sizes only"}`,
         onSuccess: (f) => {
             f.hidden = true;
             document.querySelectorAll("#orderSizes input, #orderSizes button").forEach((el) => { el.disabled = true; });
