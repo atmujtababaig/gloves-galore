@@ -47,13 +47,18 @@ window.GG_ORDERS = {
             { name: "Volt Flame", images: [{ src: "assets/orders/green-dragons/volt-2.jpg", label: "Volt Flame, back of hand" }] },
             { name: "Venom", images: [{ src: "assets/orders/green-dragons/venom-2.jpg", label: "Venom, back of hand" }] },
         ],
-        sizes: ["Youth S", "Youth M", "Youth L", "Adult S", "Adult M", "Adult L", "Adult XL"],
+        // Youth XS added and Youth L shown as "Youth L / Adult XS" (Richard needs XS, 2026-11-18)
+        sizes: ["Youth XS", "Youth S", "Youth M", "Youth L / Adult XS", "Adult S", "Adult M", "Adult L", "Adult XL"],
         // agreed 2026-10-14: $12 a pair for the 40-pair order
         tiers: [{ min: 1, price: 12 }],
         // sample shipping $60 paid by PayPal 2026-11-09 (to Israr Iqbal), so no extras
         // he asked to pay for all of it at once (WhatsApp 2026-11-09)
         payInFull: true,
         payMethods: ["PayPal"],
+        // PayPal fee added on top so the full $12 a pair lands (his call 2026-11-18)
+        payFee: { label: "PayPal fee", rate: 0.041, fixed: 0.30 },
+        // sizes only for now: no prices or payment on the page, price + invoice sent later (his call 2026-11-18)
+        sizesOnly: true,
         // filled in on the page, he can still change them
         customer: {
             name: "Richard Lamb",

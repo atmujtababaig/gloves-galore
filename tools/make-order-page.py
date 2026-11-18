@@ -68,15 +68,16 @@ PAGE = f"""<!DOCTYPE html>
                     </div>
                     <dl class="order-panel order-pricing" id="orderPricing" hidden></dl>
                     <div class="order-panel" id="orderGuide" hidden>
-                        <img src="assets/orders/size-guide.png" alt="Glove size guide: hand width and length for youth and adult sizes" width="1200" height="930" loading="lazy">
+                        <img src="assets/orders/size-guide.png" alt="Glove size guide: hand width and length for youth and adult sizes" width="1200" height="985" loading="lazy">
                     </div>
                     <div class="order-designs" id="orderDesigns" role="group" aria-label="Design" hidden></div>
                     <div id="orderSizes"></div>
 
-                    <dl class="order-summary">
+                    <dl class="order-summary" id="orderSummary">
                         <div><dt>Total pairs</dt><dd id="sumPairs">0</dd></div>
                         <div><dt>Price per pair</dt><dd id="sumPrice">-</dd></div>
                         <div id="sumExtrasRow" hidden><dt id="sumExtrasLabel"></dt><dd id="sumExtras"></dd></div>
+                        <div id="sumFeeRow" hidden><dt id="sumFeeLabel"></dt><dd id="sumFee"></dd></div>
                         <div class="order-summary-total"><dt>Order total</dt><dd id="sumTotal">-</dd></div>
                         <div>
                             <dt>Advance payment
@@ -100,6 +101,7 @@ PAGE = f"""<!DOCTYPE html>
                     <input type="hidden" name="sizes">
                     <input type="hidden" name="quantity">
                     <input type="hidden" name="price_per_pair">
+                    <input type="hidden" name="payment_fee">
                     <input type="hidden" name="order_total">
                     <input type="hidden" name="pay_now">
                     <input type="hidden" name="pay_before_shipping">
@@ -147,8 +149,8 @@ PAGE = f"""<!DOCTYPE html>
                 </form>
 
                 <div class="order-done" id="orderDone" hidden>
-                    <h3>Order received</h3>
-                    <dl class="order-summary">
+                    <h3 id="doneTitle">Order received</h3>
+                    <dl class="order-summary" id="doneSummary">
                         <div><dt>Order number</dt><dd id="doneNo"></dd></div>
                         <div><dt>Status</dt><dd>Waiting for payment</dd></div>
                         <div><dt>Due now</dt><dd id="doneDue"></dd></div>
@@ -317,7 +319,22 @@ PAGE = f"""<!DOCTYPE html>
         Object.entries(order.customer || {{}}).forEach(([name, v]) => {{
             if (form.elements[name]) form.elements[name].value = v;
         }});
+        // sizes only (orders.js "sizesOnly"): no prices or payment on the page, the price comes later by mail
+        if (order.sizesOnly) {{
+            document.querySelector('[aria-controls="orderPricing"]').hidden = true;
+            [...$("orderSummary").children].slice(1).forEach((el) => {{ el.style.display = "none"; }});
+            document.querySelector(".order-pay").remove();
+            document.querySelector(".order-agree span").textContent = "I checked the designs and the sizes.";
+            document.querySelector(".order-submit").textContent = "Send sizes";
+            $("doneTitle").textContent = "Sizes received";
+            [...$("doneSummary").children].slice(1).forEach((el) => {{ el.style.display = "none"; }});
+        }}
         form.addEventListener("submit", () => {{
+            if (order.sizesOnly) {{
+                $("doneNo").textContent = orderNo;
+                $("doneNext").textContent = "Thanks! We'll go through the sizes and get back to you by email within one working day.";
+                return;
+            }}
             const method = form.elements.payment_method.value;
             $("doneNo").textContent = orderNo;
             $("doneDue").textContent = form.elements.pay_now.value;
@@ -332,13 +349,23 @@ PAGE = f"""<!DOCTYPE html>
             }});
             const pairs = counts.reduce((a, [, , n]) => a + n, 0);
             const tier = [...tiers].reverse().find((t) => pairs >= t.min) || tiers[0];
-            const total = pairs ? pairs * tier.price + extrasTotal : 0;
+            // payment fee (orders.js "payFee"): added on top so the agreed amount still lands after the fee,
+            // rounded up to a whole dollar. PayPal JP: 4.10% + $0.30 (checked on the $60 sample invoice, fee $2.76)
+            const sub = pairs ? pairs * tier.price + extrasTotal : 0;
+            const pf = order.payFee;
+            const total = sub && pf ? Math.ceil((sub + pf.fixed) / (1 - pf.rate)) : sub;
+            const fee = Math.round((total - sub) * 100) / 100;
             const full = order.payInFull || total < terms.payInFullBelow;
             const now = full ? total : Math.round(total * terms.depositShare * 100) / 100;
             const later = Math.round((total - now) * 100) / 100;
 
             $("sumPairs").textContent = pairs;
             $("sumPrice").textContent = pairs ? money(tier.price) : "-";
+            if (pf) {{
+                $("sumFeeRow").hidden = false;
+                $("sumFeeLabel").textContent = pf.label;
+                $("sumFee").textContent = pairs ? money(fee) : "-";
+            }}
             $("sumTotal").textContent = pairs ? money(total) : "-";
             $("sumDeposit").textContent = pairs ? money(now) : "-";
 
@@ -353,6 +380,7 @@ PAGE = f"""<!DOCTYPE html>
             }});
             set("quantity", pairs);
             set("price_per_pair", pairs ? money(tier.price) : "");
+            set("payment_fee", pairs && pf ? money(fee) : "");
             set("order_total", pairs ? money(total) : "");
             set("pay_now", pairs ? money(now) : "");
             set("pay_before_shipping", pairs ? money(later) : "");
